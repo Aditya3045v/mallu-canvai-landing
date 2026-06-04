@@ -131,40 +131,60 @@ function Index() {
 function Nav() {
   const [open, setOpen] = useState(false);
   const links = [
-    { h: "#pricing", l: "Pricing" },
+    { h: "#", l: "Home" },
     { h: "#features", l: "Features" },
+    { h: "#pricing", l: "Pricing" },
     { h: "#setup", l: "Setup" },
     { h: "#faq", l: "FAQ" },
   ];
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4 md:px-12 md:pt-6 lg:px-16">
-      <div className="liquid-glass mx-auto flex max-w-7xl items-center justify-between rounded-xl px-3 py-2 md:px-4">
-        <span className="text-xl font-semibold tracking-tight text-white md:text-2xl">
-          Lovable Extension
+    <header className="sticky top-0 z-50 px-4 pt-5 md:px-10 md:pt-6">
+      <div
+        className="mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-5 py-3"
+        style={{ background: "rgba(30,30,30,0.92)", backdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.08)" }}
+      >
+        {/* Brand */}
+        <span className="text-lg font-bold tracking-tight text-white">
+          Lovable{" "}<span style={{ color: "#f5c518" }}>Extension</span>
         </span>
-        <nav className="hidden gap-8 text-sm text-white/80 md:flex">
+
+        {/* Desktop links */}
+        <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">
           {links.map((n) => (
-            <a
-              key={n.h}
-              href={n.h}
-              className="transition hover:text-gray-300"
-            >
+            <a key={n.h} href={n.h} className="transition hover:text-white">
               {n.l}
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
-            className="rounded-lg p-1.5 text-white md:hidden"
+
+        {/* CTA */}
+        <div className="hidden md:block">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full px-5 py-2 text-sm font-semibold transition hover:scale-105"
+            style={{ background: "#f5c518", color: "#111" }}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            Get Access
+          </a>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+          className="rounded-lg p-1.5 text-white md:hidden"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
+
       {open && (
-        <div className="liquid-glass mx-auto mt-2 max-w-7xl rounded-xl p-4 md:hidden animate-fade-in">
+        <div
+          className="mx-auto mt-2 max-w-6xl rounded-2xl p-4 md:hidden"
+          style={{ background: "rgba(30,30,30,0.95)", border: "1px solid rgba(255,255,255,0.08)" }}
+        >
           <nav className="flex flex-col gap-3 text-sm text-white/90">
             {links.map((n) => (
               <a
@@ -176,6 +196,15 @@ function Nav() {
                 {n.l}
               </a>
             ))}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 rounded-full px-5 py-2 text-center text-sm font-semibold"
+              style={{ background: "#f5c518", color: "#111" }}
+            >
+              Get Access
+            </a>
           </nav>
         </div>
       )}
@@ -183,87 +212,110 @@ function Nav() {
   );
 }
 
+const heroFeatures = [
+  { icon: "⚡", t: "30-Minute Free Trial",     d: "Unlimited credit usage before you buy." },
+  { icon: "∞", t: "No Credit Limits",          d: "Build freely during your active plan." },
+  { icon: "🔒", t: "No Workspace Transfer",   d: "Continue with your existing workspace." },
+  { icon: "🚀", t: "Instant Activation",       d: "Start quickly after purchase." },
+];
+
 function Hero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "var(--grad-hero)" }}
+      style={{ background: "#0f0f0f", minHeight: "88vh" }}
     >
-      <HlsVideo
-        src="https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8"
-        className="absolute inset-0 h-full w-full object-cover opacity-40"
+      {/* subtle radial glow */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ background: "radial-gradient(ellipse 60% 50% at 20% 60%, rgba(245,197,24,0.06) 0%, transparent 70%)" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
-      <div className="relative mx-auto max-w-7xl px-4 pt-12 pb-16 text-center md:px-6 md:pt-20 md:pb-24">
-        <div className="animate-hero-in mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-1.5 text-xs">
-          <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-primary" />
-          Instant Delivery · 30-Min Free Trial
-        </div>
-        <h1
-          className="animate-hero-in font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-7xl"
-          style={{ animationDelay: "0.1s" }}
-        >
-          Build Faster. <br />
-          <span className="bg-gradient-to-r from-primary to-emerald-300 bg-clip-text text-transparent">
-            Create More.
-          </span>
-          <br />
-          Launch Without Limits.
-        </h1>
-        <p
-          className="animate-hero-in mx-auto mt-6 max-w-2xl text-sm text-muted-foreground md:text-lg"
-          style={{ animationDelay: "0.2s" }}
-        >
-          No credit limits. No workspace transfer. Lovable Extension works seamlessly
-          with your existing workspace — starting at just ₹16.25/hr.
-        </p>
-        <div
-          className="animate-hero-in mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center md:mt-10"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <a
-            href="https://drive.google.com/file/d/1Od9RvcRrrgfwkBlqGvv_3Hec5hCGrwAJ/view?usp=drive_link"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="animate-glow inline-flex flex-col items-center justify-center gap-1 rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-105"
-          >
-            <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Extension</span>
-            <span className="text-[10px] font-normal opacity-80">Extension name in Chrome: MalluCanvai</span>
-          </a>
-          <a
-            href="#setup"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card/50 px-6 py-3 text-sm font-semibold backdrop-blur transition hover:scale-105 hover:bg-card"
-          >
-            <Play className="h-4 w-4" /> Watch Setup Video
-          </a>
-        </div>
-        <p className="mt-6 text-xs text-muted-foreground">
-          Scroll down to view plans, trial details, and setup steps.
-        </p>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 md:grid-cols-4">
-          {[
-            {
-              t: "30-Minute Free Trial",
-              d: "Unlimited credit usage before you buy.",
-            },
-            { t: "No Credit Limits", d: "Build freely during your active plan." },
-            {
-              t: "No Workspace Transfer",
-              d: "Continue with your existing workspace.",
-            },
-            { t: "Instant Activation", d: "Start quickly after purchase." },
-          ].map((f, i) => (
-            <Reveal key={f.t} delay={i * 80}>
-              <div className="hover-lift rounded-2xl border border-border bg-card/40 p-5 text-left backdrop-blur">
-                <div className="font-display text-base font-semibold">
-                  {f.t}
-                </div>
-                <div className="mt-1 text-sm text-muted-foreground">{f.d}</div>
-              </div>
-            </Reveal>
-          ))}
+      <div className="relative mx-auto flex max-w-6xl flex-col items-start justify-center gap-12 px-5 py-20 md:flex-row md:items-center md:gap-16 md:px-10 md:py-28">
+
+        {/* ── LEFT COLUMN ── */}
+        <div className="flex-1">
+          {/* badge */}
+          <div
+            className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold"
+            style={{ background: "rgba(245,197,24,0.15)", color: "#f5c518", border: "1px solid rgba(245,197,24,0.3)" }}
+          >
+            <Zap className="h-3 w-3" />
+            INSTANT DELIVERY
+          </div>
+
+          {/* headline */}
+          <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
+            Build Faster.<br />
+            Create More.<br />
+            <span style={{ color: "#f5c518" }}>Launch Without</span><br />
+            <span style={{ background: "linear-gradient(90deg,#f5c518,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Limits.</span>
+          </h1>
+
+          {/* sub */}
+          <p className="mt-5 max-w-md text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+            No credit limits. No workspace transfer. Works with your existing workspace.
+          </p>
+
+          {/* free trial badge */}
+          <div
+            className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold"
+            style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.3)" }}
+          >
+            <Check className="h-3 w-3" /> 30-Minute Free Trial Available
+          </div>
+          <p className="mt-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+            Unlock unlimited credit usage for 30 minutes before choosing a plan.
+          </p>
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="https://drive.google.com/file/d/1Od9RvcRrrgfwkBlqGvv_3Hec5hCGrwAJ/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
+              style={{ background: "#f5c518", color: "#111" }}
+            >
+              <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Guide</span>
+              <span className="text-[10px] font-normal opacity-60">Extension name: MalluCanvai</span>
+            </a>
+            <a
+              href="#setup"
+              className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition hover:scale-105"
+              style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "#fff" }}
+            >
+              <Play className="h-4 w-4" /> Watch Setup Video
+            </a>
+          </div>
         </div>
+
+        {/* ── RIGHT COLUMN — feature list card ── */}
+        <div className="w-full flex-shrink-0 md:w-[380px]">
+          <div
+            className="rounded-2xl p-1"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            {heroFeatures.map((f, i) => (
+              <div
+                key={f.t}
+                className="flex items-center gap-4 rounded-xl px-5 py-4 transition hover:bg-white/5"
+                style={{ borderBottom: i < heroFeatures.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-base"
+                  style={{ background: "rgba(245,197,24,0.1)", color: "#f5c518" }}>
+                  {f.icon}
+                </span>
+                <div className="flex-1">
+                  <div className="text-sm font-semibold text-white">{f.t}</div>
+                  <div className="mt-0.5 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{f.d}</div>
+                </div>
+                <Check className="h-4 w-4 shrink-0" style={{ color: "#4ade80" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );
