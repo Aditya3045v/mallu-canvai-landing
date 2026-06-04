@@ -231,11 +231,16 @@ function Hero() {
     >
       {/* subtle radial glow */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 z-0"
         style={{ background: "radial-gradient(ellipse 60% 50% at 20% 60%, rgba(245,197,24,0.06) 0%, transparent 70%)" }}
       />
+      
+      {/* Animated lining/grid background */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="bg-grid-animated" />
+      </div>
 
-      <div className="relative mx-auto flex max-w-6xl flex-col items-start justify-center gap-12 px-5 py-20 md:flex-row md:items-center md:gap-16 md:px-10 md:py-28">
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-start justify-center gap-12 px-5 py-20 md:flex-row md:items-center md:gap-16 md:px-10 md:py-28">
 
         {/* ── LEFT COLUMN ── */}
         <div className="flex-1">
