@@ -11,6 +11,7 @@ import {
   Sparkles,
   Menu,
   X,
+  Calculator,
 } from "lucide-react";
 import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
@@ -20,31 +21,42 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const INR_RATE = 16.25;
+const USD_RATE = 0.5;
+
 const plans = [
   {
-    name: "12 Hours Pass",
-    price: "₹299",
+    name: "6 Hours Pass",
+    price: `₹${(6 * INR_RATE).toFixed(0)}`,
+    usd: `$${(6 * USD_RATE).toFixed(2)}`,
     tag: "Quick sprint for short tasks",
     cta: "Get Instant Access",
-    features: [
-      "No credit limits",
-      "Existing workspace supported",
-      "No workspace transfer",
-      "Instant activation",
-    ],
+    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+  },
+  {
+    name: "12 Hours Pass",
+    price: `₹${(12 * INR_RATE).toFixed(0)}`,
+    usd: `$${(12 * USD_RATE).toFixed(2)}`,
+    tag: "Half-day builder session",
+    cta: "Get Instant Access",
+    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
   {
     name: "24 Hours Pass",
-    price: "₹399",
-    tag: "Perfect for quick builds & testing",
+    price: `₹${(24 * INR_RATE).toFixed(0)}`,
+    usd: `$${(24 * USD_RATE).toFixed(2)}`,
+    tag: "Full-day build marathon",
     cta: "Get Instant Access",
     badge: "Most Popular",
-    features: [
-      "No credit limits",
-      "Existing workspace supported",
-      "No workspace transfer",
-      "Instant activation",
-    ],
+    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+  },
+  {
+    name: "7 Days Pass",
+    price: `₹${(7 * 24 * INR_RATE).toFixed(0)}`,
+    usd: `$${(7 * 24 * USD_RATE).toFixed(2)}`,
+    tag: "Week-long unlimited access",
+    cta: "Get Instant Access",
+    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
 ];
 
@@ -69,7 +81,7 @@ const faqs = [
   },
   {
     q: "Do I need to transfer my workspace?",
-    a: "No. MalluAI works directly with your existing workspace — no transfer needed.",
+    a: "No. Lovable Extension works directly with your existing workspace — no transfer needed.",
   },
   {
     q: "Do I need to move my projects?",
@@ -80,12 +92,16 @@ const faqs = [
     a: "Activation is instant once your purchase is complete.",
   },
   {
-    q: "Are there any credit limits?",
-    a: "No. During your active plan you build freely with no credit caps.",
+    q: "How is pricing calculated?",
+    a: "Pricing is hourly: ₹16.25/hr for Indian users and $0.50/hr for US users. Use the calculator on the pricing page to estimate your cost.",
+  },
+  {
+    q: "What is the Chrome extension called?",
+    a: "The extension is named MalluCanvai in the Chrome browser. Search for it or install from the ZIP file provided.",
   },
   {
     q: "Is support available?",
-    a: "Yes, support is included with every plan and scales up with higher tiers.",
+    a: "Yes, support is included with every plan. Reach us on WhatsApp anytime.",
   },
 ];
 
@@ -101,6 +117,7 @@ function Index() {
       <Marquee />
       <Features />
       <Pricing />
+      <PriceCalculator />
       <WhyUs />
       <Setup />
       <Steps />
@@ -123,7 +140,7 @@ function Nav() {
     <header className="sticky top-0 z-50 px-4 pt-4 md:px-12 md:pt-6 lg:px-16">
       <div className="liquid-glass mx-auto flex max-w-7xl items-center justify-between rounded-xl px-3 py-2 md:px-4">
         <span className="text-xl font-semibold tracking-tight text-white md:text-2xl">
-          MalluAI
+          Lovable Extension
         </span>
         <nav className="hidden gap-8 text-sm text-white/80 md:flex">
           {links.map((n) => (
@@ -197,8 +214,8 @@ function Hero() {
           className="animate-hero-in mx-auto mt-6 max-w-2xl text-sm text-muted-foreground md:text-lg"
           style={{ animationDelay: "0.2s" }}
         >
-          No credit limits. No workspace transfer. MalluAI works seamlessly
-          with your existing workspace.
+          No credit limits. No workspace transfer. Lovable Extension works seamlessly
+          with your existing workspace — starting at just ₹16.25/hr.
         </p>
         <div
           className="animate-hero-in mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center md:mt-10"
@@ -208,9 +225,10 @@ function Hero() {
             href="https://drive.google.com/file/d/1Od9RvcRrrgfwkBlqGvv_3Hec5hCGrwAJ/view?usp=drive_link"
             target="_blank"
             rel="noopener noreferrer"
-            className="animate-glow inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-105"
+            className="animate-glow inline-flex flex-col items-center justify-center gap-1 rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-105"
           >
-            <Download className="h-4 w-4" /> Download Guide
+            <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Extension</span>
+            <span className="text-[10px] font-normal opacity-80">Extension name in Chrome: MalluCanvai</span>
           </a>
           <a
             href="#setup"
@@ -306,7 +324,12 @@ function Pricing() {
       id="pricing"
       className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16"
     >
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal>
+        <div className="mb-8 text-center">
+          <p className="text-sm text-muted-foreground">Hourly rate: <span className="text-primary font-semibold">₹16.25/hr</span> (India) · <span className="text-primary font-semibold">$0.50/hr</span> (US) · Use the calculator below to estimate your cost.</p>
+        </div>
+      </Reveal>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i * 70}>
             <div className="hover-lift relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-6 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl md:p-7">
@@ -316,13 +339,10 @@ function Pricing() {
                   {p.badge}
                 </span>
               )}
-              <h3 className="font-display text-lg font-bold md:text-xl">
-                {p.name}
-              </h3>
+              <h3 className="font-display text-lg font-bold md:text-xl">{p.name}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{p.tag}</p>
-              <div className="mt-4 font-display text-3xl font-bold md:mt-5 md:text-4xl">
-                {p.price}
-              </div>
+              <div className="mt-4 font-display text-3xl font-bold md:mt-5 md:text-4xl">{p.price}</div>
+              <div className="mt-1 text-sm text-muted-foreground">{p.usd}</div>
               <ul className="mt-5 flex-1 space-y-2.5 text-sm md:mt-6">
                 {p.features.map((f) => (
                   <li key={f} className="flex items-start gap-2">
@@ -331,15 +351,11 @@ function Pricing() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 rounded-xl border border-primary/30 bg-primary/10 px-3 py-2 text-xs text-muted-foreground">
-                Tip: For safety, we recommend working on a backup or remixed
-                project when using this extension.
-              </p>
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 rounded-full bg-primary py-3 text-center text-sm font-semibold text-primary-foreground transition hover:scale-[1.02] hover:opacity-90"
+                className="mt-5 rounded-full bg-primary py-3 text-center text-sm font-semibold text-primary-foreground transition hover:scale-[1.02] hover:opacity-90"
               >
                 {p.cta}
               </a>
@@ -347,6 +363,72 @@ function Pricing() {
           </Reveal>
         ))}
       </div>
+    </section>
+  );
+}
+
+function PriceCalculator() {
+  const [hours, setHours] = useState(24);
+  const [currency, setCurrency] = useState<"inr" | "usd">("inr");
+  const cost = currency === "inr" ? (hours * 16.25).toFixed(2) : (hours * 0.5).toFixed(2);
+  const symbol = currency === "inr" ? "₹" : "$";
+  return (
+    <section className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+      <Reveal>
+        <div className="rounded-3xl border border-primary/30 bg-card/40 p-6 md:p-10 backdrop-blur">
+          <div className="flex items-center gap-3 mb-6">
+            <Calculator className="h-6 w-6 text-primary" />
+            <h2 className="font-display text-2xl font-bold md:text-3xl">Price Calculator</h2>
+          </div>
+          <p className="text-sm text-muted-foreground mb-8">
+            Estimate your cost based on how many hours you plan to use the extension.
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                Duration: <span className="text-primary">{hours} hour{hours !== 1 ? "s" : ""}</span>
+              </label>
+              <input
+                type="range" min={1} max={168} value={hours}
+                onChange={(e) => setHours(Number(e.target.value))}
+                className="w-full accent-primary"
+              />
+              <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
+                <span>1 hr</span><span>1 week</span>
+              </div>
+              <div className="mt-3 flex gap-2">
+                {[6,12,24,48,168].map(h => (
+                  <button key={h} onClick={() => setHours(h)}
+                    className={`rounded-full px-3 py-1 text-xs font-semibold border transition ${hours === h ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground hover:border-primary/50"}`}>
+                    {h < 24 ? `${h}h` : h === 24 ? "1d" : h === 48 ? "2d" : "7d"}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Currency</label>
+              <div className="flex gap-3 mb-6">
+                <button onClick={() => setCurrency("inr")}
+                  className={`flex-1 rounded-xl py-2.5 text-sm font-semibold border transition ${currency === "inr" ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground"}`}>
+                  🇮🇳 INR (₹16.25/hr)
+                </button>
+                <button onClick={() => setCurrency("usd")}
+                  className={`flex-1 rounded-xl py-2.5 text-sm font-semibold border transition ${currency === "usd" ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground"}`}>
+                  🇺🇸 USD ($0.50/hr)
+                </button>
+              </div>
+              <div className="rounded-2xl border border-primary/30 bg-primary/10 p-5 text-center">
+                <div className="text-xs text-muted-foreground mb-1">Estimated cost for {hours}h</div>
+                <div className="font-display text-4xl font-bold text-primary">{symbol}{cost}</div>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                  className="mt-4 inline-block rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition hover:scale-105">
+                  Order This Plan
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -378,7 +460,7 @@ function WhyUs() {
     <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
       <Reveal>
         <h2 className="text-center font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-          Why Creators Choose MalluAI
+          Why Creators Choose Lovable Extension
         </h2>
       </Reveal>
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 md:mt-12 md:gap-6">
@@ -639,7 +721,7 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center text-xs text-muted-foreground md:flex-row md:text-sm">
         <div className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-primary" />
-          <span>© {new Date().getFullYear()} MalluAI</span>
+          <span>© {new Date().getFullYear()} Lovable Extension</span>
         </div>
         <div className="flex flex-wrap justify-center gap-4 md:gap-5">
           <span>Need Help?</span>
