@@ -107,23 +107,27 @@ const faqs = [
 
 const WHATSAPP_URL =
   "https://wa.me/917320091112?text=" +
-  encodeURIComponent("Hi, I'm interested...");
+  encodeURIComponent("Hi! I want to start the 30-minute FREE TRIAL for Lovable Extension. Please send me the trial code.");
+
+function planWhatsApp(name: string, price: string) {
+  return "https://wa.me/917320091112?text=" +
+    encodeURIComponent(`Hi! I want to purchase the ${name} (${price}) for Lovable Extension. Please confirm payment details.`);
+}
 
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
-      <Marquee />
-      <Features />
+      <TrustBar />
+      <HowItWorks />
       <Pricing />
       <PriceCalculator />
-      <WhyUs />
       <Setup />
-      <Steps />
       <FAQ />
       <CTA />
       <Footer />
+      <StickyWhatsApp />
     </div>
   );
 }
@@ -370,15 +374,134 @@ function Features() {
   );
 }
 
+/* ─── TRUST BAR ─────────────────────────────────── */
+function TrustBar() {
+  const items = [
+    { icon: "⚡", text: "Instant Activation" },
+    { icon: "✅", text: "30-Min Free Trial" },
+    { icon: "🔒", text: "No Workspace Transfer" },
+    { icon: "♾️", text: "No Credit Limits" },
+    { icon: "💬", text: "WhatsApp Support" },
+    { icon: "🚀", text: "Works Immediately" },
+  ];
+  return (
+    <div
+      className="border-y px-4 py-3"
+      style={{ background: "rgba(245,197,24,0.06)", borderColor: "rgba(245,197,24,0.2)" }}
+    >
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2">
+        {items.map((it) => (
+          <span key={it.text} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>
+            <span>{it.icon}</span> {it.text}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── HOW IT WORKS ───────────────────────────────── */
+function HowItWorks() {
+  const steps = [
+    {
+      num: "01",
+      icon: "💬",
+      title: "Message Us on WhatsApp",
+      desc: "Tap the button below and send us a message. We reply within minutes, every day.",
+      cta: "Message Now →",
+      href: WHATSAPP_URL,
+      highlight: true,
+    },
+    {
+      num: "02",
+      icon: "🔑",
+      title: "Receive Your Access Key",
+      desc: "After payment (or for a free trial), we instantly send you a unique activation key.",
+      cta: null,
+      href: null,
+      highlight: false,
+    },
+    {
+      num: "03",
+      icon: "🚀",
+      title: "Install, Activate & Build",
+      desc: "Load the extension in Chrome, enter your key, and start building with unlimited credits.",
+      cta: "See Setup Guide ↓",
+      href: "#setup",
+      highlight: false,
+    },
+  ];
+  return (
+    <section id="how-it-works" className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
+      <Reveal>
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
+            style={{ background: "rgba(245,197,24,0.12)", color: "#f5c518", border: "1px solid rgba(245,197,24,0.25)" }}>
+            ⚡ Simple 3-Step Process
+          </div>
+          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            How to Get Started
+          </h2>
+          <p className="mt-3 text-sm md:text-base" style={{ color: "rgba(255,255,255,0.5)" }}>
+            From zero to building in under 5 minutes.
+          </p>
+        </div>
+      </Reveal>
+      <div className="grid gap-5 md:grid-cols-3">
+        {steps.map((s, i) => (
+          <Reveal key={s.num} delay={i * 100}>
+            <div
+              className="relative flex h-full flex-col rounded-2xl p-6 md:p-7"
+              style={{
+                background: s.highlight ? "rgba(245,197,24,0.08)" : "rgba(255,255,255,0.03)",
+                border: s.highlight ? "1px solid rgba(245,197,24,0.4)" : "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              {s.highlight && (
+                <span className="absolute -top-3 left-6 rounded-full px-3 py-1 text-[10px] font-bold"
+                  style={{ background: "#f5c518", color: "#111" }}>
+                  START HERE
+                </span>
+              )}
+              <div className="mb-4 flex items-center gap-3">
+                <span className="text-3xl">{s.icon}</span>
+                <span className="font-display text-4xl font-black" style={{ color: "rgba(245,197,24,0.3)" }}>{s.num}</span>
+              </div>
+              <h3 className="font-display text-lg font-bold text-white mb-2">{s.title}</h3>
+              <p className="text-sm flex-1" style={{ color: "rgba(255,255,255,0.5)" }}>{s.desc}</p>
+              {s.cta && s.href && (
+                <a href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="mt-5 inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-bold transition hover:scale-105"
+                  style={s.highlight ? { background: "#f5c518", color: "#111" } : { background: "rgba(255,255,255,0.08)", color: "#fff" }}>
+                  {s.cta}
+                </a>
+              )}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ─── PRICING ────────────────────────────────────── */
+
 function Pricing() {
   return (
-    <section
-      id="pricing"
-      className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16"
-    >
+    <section id="pricing" className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
       <Reveal>
-        <div className="mb-8 text-center">
-          <p className="text-sm text-muted-foreground">Hourly rate: <span className="text-primary font-semibold">₹16.25/hr</span> (India) · <span className="text-primary font-semibold">$0.50/hr</span> (US) · Use the calculator below to estimate your cost.</p>
+        <div className="mb-12 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
+            style={{ background: "rgba(245,197,24,0.12)", color: "#f5c518", border: "1px solid rgba(245,197,24,0.25)" }}>
+            💰 Transparent Hourly Pricing
+          </div>
+          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            Choose Your Access Pass
+          </h2>
+          <p className="mt-4 text-sm text-muted-foreground md:text-base">
+            Hourly rate: <span className="text-primary font-semibold">₹16.25/hr</span> (India) · <span className="text-primary font-semibold">$0.50/hr</span> (US) · Use the calculator below to estimate your cost.
+          </p>
         </div>
       </Reveal>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -404,7 +527,7 @@ function Pricing() {
                 ))}
               </ul>
               <a
-                href={WHATSAPP_URL}
+                href={planWhatsApp(p.name, p.price)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-5 rounded-full bg-primary py-3 text-center text-sm font-semibold text-primary-foreground transition hover:scale-[1.02] hover:opacity-90"
@@ -472,7 +595,7 @@ function PriceCalculator() {
               <div className="rounded-2xl border border-primary/30 bg-primary/10 p-5 text-center">
                 <div className="text-xs text-muted-foreground mb-1">Estimated cost for {hours}h</div>
                 <div className="font-display text-4xl font-bold text-primary">{symbol}{cost}</div>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                <a href={planWhatsApp(`${hours} Hours Pass`, `${symbol}${cost}`)} target="_blank" rel="noopener noreferrer"
                   className="mt-4 inline-block rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition hover:scale-105">
                   Order This Plan
                 </a>
@@ -730,40 +853,59 @@ function FAQ() {
 
 function CTA() {
   return (
-    <section className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-24">
+    <section className="mx-auto max-w-4xl px-5 py-16 md:px-10 md:py-24">
       <Reveal>
         <div
-          className="rounded-3xl border border-border p-6 text-center sm:p-10 md:p-12"
-          style={{ background: "var(--grad-hero), var(--grad-card)" }}
+          className="rounded-3xl p-8 text-center md:p-14"
+          style={{ background: "rgba(245,197,24,0.06)", border: "1px solid rgba(245,197,24,0.25)" }}
         >
-          <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-            Try Unlimited Credits Before You Buy
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-5"
+            style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.3)" }}>
+            🎁 30-Minute Free Trial — No Payment Needed
+          </div>
+          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            Ready to Build Without Limits?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
-            Start with a 30-minute free trial, use your existing workspace, and
-            upgrade only when you are ready.
+          <p className="mx-auto mt-4 max-w-lg text-sm md:text-base" style={{ color: "rgba(255,255,255,0.55)" }}>
+            Message us on WhatsApp right now. We'll send your trial code within minutes — no card, no signup.
           </p>
-          <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap md:mt-8">
+          <div className="mt-8 flex flex-col items-center gap-4">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="animate-glow rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-105"
+              className="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-bold transition hover:scale-105"
+              style={{ background: "#f5c518", color: "#111" }}
             >
-              Start Free Trial
+              <span className="text-xl">💬</span> Start Free Trial on WhatsApp
             </a>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-border bg-card/50 px-6 py-3 text-sm font-semibold transition hover:scale-105 hover:bg-card"
-            >
-              View Plans
-            </a>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+              WhatsApp: +91 73200 91112 · Replies within minutes
+            </p>
+          </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <span>✅ No credit card required</span>
+            <span>✅ Works with existing workspace</span>
+            <span>✅ Instant activation</span>
           </div>
         </div>
       </Reveal>
     </section>
+  );
+}
+
+/* ─── STICKY WHATSAPP BUTTON ─────────────────────── */
+function StickyWhatsApp() {
+  return (
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold shadow-2xl transition hover:scale-105"
+      style={{ background: "#25D366", color: "#fff" }}
+    >
+      <span className="text-lg">💬</span> WhatsApp Us
+    </a>
   );
 }
 
