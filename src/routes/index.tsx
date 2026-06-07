@@ -280,7 +280,7 @@ function Hero() {
           {/* CTAs */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
-              href="https://drive.google.com/file/d/1Od9RvcRrrgfwkBlqGvv_3Hec5hCGrwAJ/view?usp=drive_link"
+              href="https://drive.google.com/drive/folders/1y4Uroo6EzN11EpURZvaiJ2eKqQXj3RUc?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
