@@ -745,7 +745,7 @@ function Setup() {
               <span className="text-primary">Developer Mode</span> (top right),
               then click{" "}
               <span className="text-primary">Load unpacked</span> on the upper
-              left and select the unzipped folder.
+              left. <span className="font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded">IMPORTANT: When selecting the extracted folder, make sure you double click on the folder and you should see four files there. Only after this the extension will work. Make sure that you double click on the extracted folder and then select folder.</span>
             </li>
             <li>
               <span className="font-semibold text-foreground">
