@@ -61,7 +61,7 @@ const plans = [
 ];
 
 const marqueeItems = [
-  "30-Minute Free Trial",
+  "15-Minute Free Trial",
   "Unlimited Credit Usage",
   "No Workspace Transfer",
   "No Project Migration",
@@ -77,7 +77,7 @@ const marqueeItems = [
 const faqs = [
   {
     q: "Is there a free trial?",
-    a: "Yes. Try unlimited credit usage for 30 minutes before choosing a plan.",
+    a: "Yes. Try unlimited credit usage for 15 minutes before choosing a plan.",
   },
   {
     q: "Do I need to transfer my workspace?",
@@ -107,7 +107,7 @@ const faqs = [
 
 const WHATSAPP_URL =
   "https://wa.me/917320091112?text=" +
-  encodeURIComponent("Hi! I want to start the 30-minute FREE TRIAL for Lovable Extension. Please send me the trial code.");
+  encodeURIComponent("Hi! I want to start the 15-minute FREE TRIAL for Lovable Extension. Please send me the trial code.");
 
 function planWhatsApp(name: string, price: string) {
   return "https://wa.me/917320091112?text=" +
@@ -217,7 +217,7 @@ function Nav() {
 }
 
 const heroFeatures = [
-  { icon: "⚡", t: "30-Minute Free Trial",     d: "Unlimited credit usage before you buy." },
+  { icon: "⚡", t: "15-Minute Free Trial",     d: "Unlimited credit usage before you buy." },
   { icon: "∞", t: "No Credit Limits",          d: "Build freely during your active plan." },
   { icon: "🔒", t: "No Workspace Transfer",   d: "Continue with your existing workspace." },
   { icon: "🚀", t: "Instant Activation",       d: "Start quickly after purchase." },
@@ -271,10 +271,10 @@ function Hero() {
             className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold"
             style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.3)" }}
           >
-            <Check className="h-3 w-3" /> 30-Minute Free Trial Available
+            <Check className="h-3 w-3" /> 15-Minute Free Trial Available
           </div>
           <p className="mt-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
-            Unlock unlimited credit usage for 30 minutes before choosing a plan.
+            Unlock unlimited credit usage for 15 minutes before choosing a plan.
           </p>
 
           {/* CTAs */}
@@ -357,13 +357,13 @@ function Features() {
           Build Without Limits
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
-          Try first with a 30-minute free trial. Upgrade only when it works for
+          Try first with a 15-minute free trial. Upgrade only when it works for
           you.
         </p>
       </Reveal>
       <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs md:mt-10 md:gap-3 md:text-sm">
         {[
-          "30-minute trial available",
+          "15-minute trial available",
           "No credit limits",
           "Instant delivery",
           "No project migration",
@@ -383,7 +383,7 @@ function Features() {
 function TrustBar() {
   const items = [
     { icon: "⚡", text: "Instant Activation" },
-    { icon: "✅", text: "30-Min Free Trial" },
+    { icon: "✅", text: "15-Min Free Trial" },
     { icon: "🔒", text: "No Workspace Transfer" },
     { icon: "♾️", text: "No Credit Limits" },
     { icon: "💬", text: "WhatsApp Support" },
@@ -866,7 +866,7 @@ function CTA() {
         >
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-5"
             style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.3)" }}>
-            🎁 30-Minute Free Trial — No Payment Needed
+            🎁 15-Minute Free Trial — No Payment Needed
           </div>
           <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
             Ready to Build Without Limits?
