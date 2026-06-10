@@ -26,10 +26,19 @@ const USD_RATE = 0.5;
 
 const plans = [
   {
-    name: "12 Hours Pass",
-    price: "₹199",
-    usd: "$2.99",
-    tag: "Half-day builder session",
+    name: "1 Month Pass",
+    price: "₹2,499",
+    usd: "$29.99",
+    tag: "30 days of unlimited building",
+    cta: "Get Instant Access",
+    badge: "Best Value",
+    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+  },
+  {
+    name: "7 Days Pass",
+    price: "₹1,299",
+    usd: "$14.99",
+    tag: "Week-long unlimited access",
     cta: "Get Instant Access",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
@@ -42,20 +51,11 @@ const plans = [
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
   {
-    name: "7 Days Pass",
-    price: "₹1,299",
-    usd: "$14.99",
-    tag: "Week-long unlimited access",
+    name: "12 Hours Pass",
+    price: "₹199",
+    usd: "$2.99",
+    tag: "Half-day builder session",
     cta: "Get Instant Access",
-    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
-  },
-  {
-    name: "1 Month Pass",
-    price: "₹2,499",
-    usd: "$29.99",
-    tag: "30 days of unlimited building",
-    cta: "Get Instant Access",
-    badge: "Best Value",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
 ];
