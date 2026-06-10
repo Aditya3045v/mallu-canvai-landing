@@ -27,16 +27,16 @@ const USD_RATE = 0.5;
 const plans = [
   {
     name: "12 Hours Pass",
-    price: `₹${(12 * INR_RATE).toFixed(0)}`,
-    usd: `$${(12 * USD_RATE).toFixed(2)}`,
+    price: "₹199",
+    usd: "$2.99",
     tag: "Half-day builder session",
     cta: "Get Instant Access",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
   {
     name: "24 Hours Pass",
-    price: `₹${(24 * INR_RATE).toFixed(0)}`,
-    usd: `$${(24 * USD_RATE).toFixed(2)}`,
+    price: "₹349",
+    usd: "$4.99",
     tag: "Full-day build marathon",
     cta: "Get Instant Access",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
