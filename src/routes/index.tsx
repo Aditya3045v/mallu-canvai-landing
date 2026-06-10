@@ -26,14 +26,6 @@ const USD_RATE = 0.5;
 
 const plans = [
   {
-    name: "6 Hours Pass",
-    price: `₹${(6 * INR_RATE).toFixed(0)}`,
-    usd: `$${(6 * USD_RATE).toFixed(2)}`,
-    tag: "Quick sprint for short tasks",
-    cta: "Get Instant Access",
-    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
-  },
-  {
     name: "12 Hours Pass",
     price: `₹${(12 * INR_RATE).toFixed(0)}`,
     usd: `$${(12 * USD_RATE).toFixed(2)}`,
@@ -47,15 +39,23 @@ const plans = [
     usd: `$${(24 * USD_RATE).toFixed(2)}`,
     tag: "Full-day build marathon",
     cta: "Get Instant Access",
-    badge: "Most Popular",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
   {
     name: "7 Days Pass",
-    price: `₹${(7 * 24 * INR_RATE).toFixed(0)}`,
-    usd: `$${(7 * 24 * USD_RATE).toFixed(2)}`,
+    price: "₹1,299",
+    usd: "$14.99",
     tag: "Week-long unlimited access",
     cta: "Get Instant Access",
+    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+  },
+  {
+    name: "1 Month Pass",
+    price: "₹2,499",
+    usd: "$29.99",
+    tag: "30 days of unlimited building",
+    cta: "Get Instant Access",
+    badge: "Best Value",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
 ];
@@ -692,6 +692,9 @@ function PriceCalculator() {
                   className="mt-4 inline-block rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition hover:scale-105">
                   Order This Plan
                 </a>
+                <p className="text-[10px] text-muted-foreground mt-3 leading-tight">
+                  * Calculated at standard hourly rate. For heavier use, choose our 1 Month Pass for ₹2,499 ($29.99) to get massive savings!
+                </p>
               </div>
             </div>
           </div>
