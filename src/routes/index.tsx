@@ -749,20 +749,7 @@ function WhyUs() {
 }
 
 function Setup() {
-  const steps = [
-    {
-      n: "Step 1",
-      t: "Install & Activate Extension",
-      d: "Download the ZIP file, unzip it, enable Developer Mode, load the extension, and activate your license key.",
-      video: "https://www.youtube.com/embed/u3WiFdr-SqY",
-    },
-    {
-      n: "Step 2",
-      t: "How to Use the Extension",
-      d: "Open your workspace, connect the extension, use your credits, and start building without moving your projects.",
-      video: "https://www.youtube.com/embed/uk2feULb5NI",
-    },
-  ];
+  const videoUrl = "https://www.youtube.com/embed/4_l5aSV8sY0";
   return (
     <section
       id="setup"
@@ -773,42 +760,43 @@ function Setup() {
           Setup & Usage Guide
         </h2>
         <p className="mt-3 text-center text-sm text-muted-foreground md:text-base">
-          Two short videos to get you started in minutes.
+          Watch this quick tutorial to install the extension and unlock unlimited credits in minutes.
         </p>
         <p className="mx-auto mt-4 max-w-2xl rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-center text-xs text-muted-foreground md:text-sm">
           Note: We have updated our landing page, but the setup process remains
           exactly the same.
         </p>
       </Reveal>
-      <div className="mt-10 grid gap-5 md:mt-12 md:grid-cols-2 md:gap-6">
-        {steps.map((s, i) => (
-          <Reveal key={s.n} delay={i * 100}>
-            <div
-              className="hover-lift overflow-hidden rounded-2xl border border-border"
-              style={{ background: "var(--grad-card)" }}
-            >
-              <div className="aspect-video w-full bg-black/40">
-                <iframe
-                  className="h-full w-full"
-                  src={s.video}
-                  title={s.t}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
-              <div className="p-5 md:p-6">
-                <div className="text-xs font-semibold uppercase tracking-wider text-primary">
-                  {s.n}
-                </div>
-                <div className="mt-1 font-display text-lg font-bold md:text-xl">
-                  {s.t}
-                </div>
-                <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
-              </div>
+      
+      <div className="mt-10 mx-auto max-w-3xl">
+        <Reveal delay={100}>
+          <div
+            className="hover-lift overflow-hidden rounded-2xl border border-border shadow-2xl"
+            style={{ background: "var(--grad-card)" }}
+          >
+            <div className="aspect-video w-full bg-black/40">
+              <iframe
+                className="h-full w-full"
+                src={videoUrl}
+                title="MalluCanvai Setup Tutorial"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
-          </Reveal>
-        ))}
+            <div className="p-5 md:p-6 text-center">
+              <div className="text-xs font-semibold uppercase tracking-wider text-primary">
+                Tutorial Video
+              </div>
+              <div className="mt-1 font-display text-lg font-bold md:text-xl">
+                Complete Setup & Activation Guide
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground mx-auto max-w-xl">
+                Follow along step-by-step to download the ZIP file, load it in Chrome under Developer Mode, activate your pass key, and start building with unlimited credits.
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </div>
 
       <Reveal>
