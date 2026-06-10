@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const INR_RATE = 16.25;
+const INR_RATE = 20;
 const USD_RATE = 0.5;
 
 const plans = [
@@ -93,7 +93,7 @@ const faqs = [
   },
   {
     q: "How is pricing calculated?",
-    a: "Pricing is hourly: ₹16.25/hr for Indian users and $0.50/hr for US users. Use the calculator on the pricing page to estimate your cost.",
+    a: "Pricing is hourly: ₹20/hr for Indian users and $0.50/hr for US users. Use the calculator on the pricing page to estimate your cost.",
   },
   {
     q: "What is the Chrome extension called?",
@@ -505,7 +505,7 @@ function Pricing() {
             Choose Your Access Pass
           </h2>
           <p className="mt-4 text-sm text-muted-foreground md:text-base">
-            Hourly rate: <span className="text-primary font-semibold">₹16.25/hr</span> (India) · <span className="text-primary font-semibold">$0.50/hr</span> (US) · Use the calculator below to estimate your cost.
+            Hourly rate: <span className="text-primary font-semibold">₹20/hr</span> (India) · <span className="text-primary font-semibold">$0.50/hr</span> (US) · Use the calculator below to estimate your cost.
           </p>
         </div>
       </Reveal>
@@ -550,7 +550,7 @@ function Pricing() {
 function PriceCalculator() {
   const [hours, setHours] = useState(24);
   const [currency, setCurrency] = useState<"inr" | "usd">("inr");
-  const cost = currency === "inr" ? (hours * 16.25).toFixed(2) : (hours * 0.5).toFixed(2);
+  const cost = currency === "inr" ? (hours * 20).toFixed(2) : (hours * 0.5).toFixed(2);
   const symbol = currency === "inr" ? "₹" : "$";
   return (
     <section className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
@@ -590,7 +590,7 @@ function PriceCalculator() {
               <div className="flex gap-3 mb-6">
                 <button onClick={() => setCurrency("inr")}
                   className={`flex-1 rounded-xl py-2.5 text-sm font-semibold border transition ${currency === "inr" ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground"}`}>
-                  🇮🇳 INR (₹16.25/hr)
+                  🇮🇳 INR (₹20/hr)
                 </button>
                 <button onClick={() => setCurrency("usd")}
                   className={`flex-1 rounded-xl py-2.5 text-sm font-semibold border transition ${currency === "usd" ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground"}`}>
