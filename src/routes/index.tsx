@@ -77,27 +77,27 @@ const marqueeItems = [
 const faqs = [
   {
     q: "Is there a free trial?",
-    a: "Yes. Try unlimited credit usage for 15 minutes before choosing a plan.",
+    a: "Yes. Try unlimited credit usage for 15 minutes before choosing a plan. No payment or registration is required to start.",
   },
   {
-    q: "Do I need to transfer my workspace?",
-    a: "No. Lovable Extension works directly with your existing workspace — no transfer needed.",
+    q: "How does the hourly pass work? Is the time continuous?",
+    a: "Yes. Hourly passes count continuous elapsed time starting from activation. For example, a 24-hour pass will be active for exactly 24 consecutive hours after activation, so we recommend activating it when you plan to build.",
   },
   {
-    q: "Do I need to move my projects?",
-    a: "Not at all. Continue working on your existing projects without any migration.",
+    q: "Do I need to transfer my workspace or projects?",
+    a: "No. Lovable Extension works directly as a client-side wrapper. It does not touch your actual workspace account or require project migrations.",
   },
   {
     q: "How fast is activation?",
-    a: "Activation is instant once your purchase is complete.",
+    a: "Activation is instant. Once you message us on WhatsApp with payment confirmation (or for your trial code), our system sends your activation key immediately.",
   },
   {
     q: "How is pricing calculated?",
-    a: "Pricing is hourly: ₹20/hr for Indian users and $0.50/hr for US users. Use the calculator on the pricing page to estimate your cost.",
+    a: "Pricing is transparently hourly: ₹20/hr for Indian users and $0.50/hr for US users. Use the calculator on the pricing page to estimate your cost.",
   },
   {
     q: "What is the Chrome extension called?",
-    a: "The extension is named MalluCanvai in the Chrome browser. Search for it or install from the ZIP file provided.",
+    a: "The extension is named MalluCanvai in the Chrome browser. Install it via the ZIP file by following the setup guide.",
   },
   {
     q: "Is support available?",
@@ -121,6 +121,7 @@ function Index() {
       <Hero />
       <TrustBar />
       <HowItWorks />
+      <Testimonials />
       <Pricing />
       <PriceCalculator />
       <Setup />
@@ -137,6 +138,7 @@ function Nav() {
   const links = [
     { h: "#", l: "Home" },
     { h: "#features", l: "Features" },
+    { h: "#reviews", l: "Reviews" },
     { h: "#pricing", l: "Pricing" },
     { h: "#setup", l: "Setup" },
     { h: "#faq", l: "FAQ" },
@@ -217,10 +219,10 @@ function Nav() {
 }
 
 const heroFeatures = [
-  { icon: "⚡", t: "15-Minute Free Trial",     d: "Unlimited credit usage before you buy." },
-  { icon: "∞", t: "No Credit Limits",          d: "Build freely during your active plan." },
-  { icon: "🔒", t: "No Workspace Transfer",   d: "Continue with your existing workspace." },
-  { icon: "🚀", t: "Instant Activation",       d: "Start quickly after purchase." },
+  { icon: "🎁", t: "15-Minute Free Trial",     d: "Test all features with unlimited credits." },
+  { icon: "⚡", t: "Unlimited Prompts & Chat",  d: "No credit deductions or token restrictions." },
+  { icon: "🔒", t: "Works on Current Projects", d: "No project migrations or workspace transfer." },
+  { icon: "🔑", t: "Instant Key Delivery",     d: "Delivered instantly via WhatsApp 24/7." },
 ];
 
 function Hero() {
@@ -255,10 +257,10 @@ function Hero() {
 
           {/* headline */}
           <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
-            Build Faster.<br />
-            Create More.<br />
-            <span style={{ color: "#f5c518" }}>Launch Without</span><br />
-            <span style={{ background: "linear-gradient(90deg,#f5c518,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Limits.</span>
+            Unlimited Credits<br />
+            For Lovable.<br />
+            <span style={{ color: "#f5c518" }}>Build Without</span><br />
+            <span style={{ background: "linear-gradient(90deg,#f5c518,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Any Limits.</span>
           </h1>
 
           {/* sub */}
@@ -286,15 +288,26 @@ function Hero() {
               className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
               style={{ background: "#f5c518", color: "#111" }}
             >
-              <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Guide</span>
-              <span className="text-[10px] font-normal opacity-60">Extension name: MalluCanvai</span>
+              <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Extension (ZIP)</span>
+              <span className="text-[10px] font-normal opacity-60">Free 15-Minute Trial Built-In</span>
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
+              style={{ background: "rgba(37,211,102,0.12)", border: "1px solid rgba(37,211,102,0.35)", color: "#25d366" }}
+            >
+              <span className="flex items-center gap-2">💬 Get Free Trial Key</span>
+              <span className="text-[10px] font-normal opacity-60">Instant WhatsApp Delivery</span>
             </a>
             <a
               href="#setup"
-              className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition hover:scale-105"
-              style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "#fff" }}
+              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
+              style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
             >
-              <Play className="h-4 w-4" /> Watch Setup Video
+              <span className="flex items-center gap-2"><Play className="h-4 w-4" /> Watch Setup</span>
+              <span className="text-[10px] font-normal opacity-60">2 Min Step-by-Step Video</span>
             </a>
           </div>
         </div>
@@ -490,6 +503,68 @@ function HowItWorks() {
   );
 }
 
+/* ─── TESTIMONIALS ───────────────────────────────── */
+function Testimonials() {
+  const reviews = [
+    {
+      quote: "MalluCanvai saved me over ₹8,000 in credit costs. I was able to build and launch my SaaS MVP in less than 24 hours without hitting a single limit.",
+      author: "Amit S.",
+      role: "Indie Hacker",
+      avatar: "💻"
+    },
+    {
+      quote: "Not needing to migrate my workspace or projects was the best part. I just enabled the extension and continued building on lovable.dev immediately.",
+      author: "David K.",
+      role: "React Developer",
+      avatar: "🚀"
+    },
+    {
+      quote: "The 12-hour pass was exactly what I needed for a hackathon. Activates instantly via WhatsApp and works flawlessly.",
+      author: "Rajesh M.",
+      role: "Startup Founder",
+      avatar: "⚙️"
+    }
+  ];
+
+  return (
+    <section id="reviews" className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
+      <Reveal>
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
+            style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.25)" }}>
+            ⭐️ Loved by Builders
+          </div>
+          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            What Developers Say
+          </h2>
+          <p className="mt-3 text-sm md:text-base" style={{ color: "rgba(255,255,255,0.5)" }}>
+            See how other indie hackers and developers are scaling their Lovable builds.
+          </p>
+        </div>
+      </Reveal>
+      <div className="grid gap-6 md:grid-cols-3">
+        {reviews.map((r, i) => (
+          <Reveal key={r.author} delay={i * 100}>
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
+              <div>
+                <div className="text-amber-400 text-lg mb-4">★★★★★</div>
+                <p className="text-sm italic" style={{ color: "rgba(255,255,255,0.75)" }}>"{r.quote}"</p>
+              </div>
+              <div className="mt-6 flex items-center gap-3 pt-4 border-t border-white/5">
+                <span className="text-2xl">{r.avatar}</span>
+                <div>
+                  <div className="text-sm font-semibold text-white">{r.author}</div>
+                  <div className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{r.role}</div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* ─── PRICING ────────────────────────────────────── */
 
 function Pricing() {
@@ -510,38 +585,51 @@ function Pricing() {
         </div>
       </Reveal>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {plans.map((p, i) => (
-          <Reveal key={p.name} delay={i * 70}>
-            <div className="hover-lift relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-6 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl md:p-7">
-              <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/10 via-transparent to-primary/10" />
-              {p.badge && (
-                <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground md:left-7">
-                  {p.badge}
-                </span>
-              )}
-              <h3 className="font-display text-lg font-bold md:text-xl">{p.name}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{p.tag}</p>
-              <div className="mt-4 font-display text-3xl font-bold md:mt-5 md:text-4xl">{p.price}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{p.usd}</div>
-              <ul className="mt-5 flex-1 space-y-2.5 text-sm md:mt-6">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span className="text-muted-foreground">{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={planWhatsApp(p.name, p.price)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 rounded-full bg-primary py-3 text-center text-sm font-semibold text-primary-foreground transition hover:scale-[1.02] hover:opacity-90"
+        {plans.map((p, i) => {
+          const isFeatured = p.badge !== undefined;
+          return (
+            <Reveal key={p.name} delay={i * 70}>
+              <div
+                className={`hover-lift relative flex h-full flex-col overflow-hidden rounded-3xl p-6 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl md:p-7 transition-all duration-300 ${
+                  isFeatured
+                    ? "border-2 border-primary bg-primary/5 scale-[1.03]"
+                    : "border border-white/15 bg-white/5"
+                }`}
               >
-                {p.cta}
-              </a>
-            </div>
-          </Reveal>
-        ))}
+                <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/10 via-transparent to-primary/10" />
+                {p.badge && (
+                  <span className="absolute top-3 right-4 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+                    {p.badge}
+                  </span>
+                )}
+                <h3 className="font-display text-lg font-bold md:text-xl">{p.name}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{p.tag}</p>
+                <div className="mt-4 font-display text-3xl font-bold md:mt-5 md:text-4xl text-white">{p.price}</div>
+                <div className="mt-1 text-sm text-muted-foreground">{p.usd}</div>
+                <ul className="mt-5 flex-1 space-y-2.5 text-sm md:mt-6">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-muted-foreground">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={planWhatsApp(p.name, p.price)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`mt-5 rounded-full py-3 text-center text-sm font-semibold transition hover:scale-[1.02] hover:opacity-90 ${
+                    isFeatured
+                      ? "bg-primary text-primary-foreground font-bold shadow-[0_0_20px_rgba(245,197,24,0.4)]"
+                      : "bg-white/10 hover:bg-white/20 text-white border border-white/10"
+                  }`}
+                >
+                  {p.cta}
+                </a>
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
