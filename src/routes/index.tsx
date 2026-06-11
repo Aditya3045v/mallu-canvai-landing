@@ -30,7 +30,7 @@ const plans = [
     price: "₹2,499",
     usd: "$29.99",
     tag: "30 days of unlimited building",
-    cta: "Get Instant Access",
+    cta: "💬 Buy on WhatsApp",
     badge: "Best Value",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
@@ -39,7 +39,7 @@ const plans = [
     price: "₹1,299",
     usd: "$14.99",
     tag: "Week-long unlimited access",
-    cta: "Get Instant Access",
+    cta: "💬 Buy on WhatsApp",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
   {
@@ -47,7 +47,7 @@ const plans = [
     price: "₹349",
     usd: "$4.99",
     tag: "Full-day build marathon",
-    cta: "Get Instant Access",
+    cta: "💬 Buy on WhatsApp",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
   {
@@ -55,7 +55,7 @@ const plans = [
     price: "₹199",
     usd: "$2.99",
     tag: "Half-day builder session",
-    cta: "Get Instant Access",
+    cta: "💬 Buy on WhatsApp",
     features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
   },
 ];
@@ -109,9 +109,67 @@ const WHATSAPP_URL =
   "https://wa.me/917320091112?text=" +
   encodeURIComponent("Hi! I want to start the 15-minute FREE TRIAL for Lovable Extension. Please send me the trial code.");
 
+const WHATSAPP_PHONE_DISPLAY = "+91 73200 91112";
+
 function planWhatsApp(name: string, price: string) {
   return "https://wa.me/917320091112?text=" +
     encodeURIComponent(`Hi! I want to purchase the ${name} (${price}) for Lovable Extension. Please confirm payment details.`);
+}
+
+/* ─── WHATSAPP INLINE BANNER ─────────────────────── */
+function WhatsAppBanner({ msg = "💬 Chat With Us on WhatsApp — Instant Replies!" }: { msg?: string }) {
+  return (
+    <div
+      className="mx-4 my-2 md:mx-10"
+      style={{}}
+    >
+      <div
+        className="rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4"
+        style={{
+          background: "linear-gradient(120deg, rgba(37,211,102,0.15) 0%, rgba(37,211,102,0.05) 100%)",
+          border: "1.5px solid rgba(37,211,102,0.4)",
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-3xl" style={{ filter: "drop-shadow(0 0 8px rgba(37,211,102,0.6))" }}>💬</span>
+          <div>
+            <div className="font-bold text-white text-base md:text-lg">{msg}</div>
+            <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.5)" }}>
+              {WHATSAPP_PHONE_DISPLAY} · We reply within minutes, every day
+            </div>
+          </div>
+        </div>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 rounded-full px-6 py-3 text-sm font-bold transition hover:scale-105 hover:brightness-110"
+          style={{
+            background: "#25D366",
+            color: "#fff",
+            boxShadow: "0 0 20px rgba(37,211,102,0.45)",
+            animation: "wa-pulse 2s ease-in-out infinite",
+          }}
+        >
+          💬 Start on WhatsApp Now →
+        </a>
+      </div>
+      <style>{`
+        @keyframes wa-pulse {
+          0%, 100% { box-shadow: 0 0 20px rgba(37,211,102,0.45); }
+          50% { box-shadow: 0 0 35px rgba(37,211,102,0.8); }
+        }
+        @keyframes wa-bounce {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-4px) scale(1.03); }
+        }
+        @keyframes wa-ping-ring {
+          0% { transform: scale(1); opacity: 0.8; }
+          100% { transform: scale(2.2); opacity: 0; }
+        }
+      `}</style>
+    </div>
+  );
 }
 
 function Index() {
@@ -121,11 +179,15 @@ function Index() {
       <Hero />
       <TrustBar />
       <HowItWorks />
+      <WhatsAppBanner msg="💬 Questions? Chat with Us on WhatsApp — We Reply in Minutes!" />
       <Testimonials />
+      <WhatsAppBanner msg="🎁 Get Your FREE 15-Minute Trial Key Right Now on WhatsApp!" />
       <Pricing />
       <PriceCalculator />
+      <WhatsAppBanner msg="💬 Ready to Order? Message Us on WhatsApp for Instant Activation!" />
       <Setup />
       <FAQ />
+      <WhatsAppBanner msg="🚀 Don't Wait — Start Building Without Limits. Chat on WhatsApp Now!" />
       <CTA />
       <Footer />
       <StickyWhatsApp />
@@ -981,15 +1043,46 @@ function CTA() {
 /* ─── STICKY WHATSAPP BUTTON ─────────────────────── */
 function StickyWhatsApp() {
   return (
-    <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold shadow-2xl transition hover:scale-105"
-      style={{ background: "#25D366", color: "#fff" }}
-    >
-      <span className="text-lg">💬</span> WhatsApp Us
-    </a>
+    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2">
+      {/* Attention label */}
+      <div
+        className="rounded-full px-3 py-1 text-xs font-bold"
+        style={{
+          background: "rgba(37,211,102,0.2)",
+          color: "#25D366",
+          border: "1px solid rgba(37,211,102,0.4)",
+          animation: "wa-bounce 2.5s ease-in-out infinite",
+        }}
+      >
+        💬 Get Free Trial!
+      </div>
+      {/* Main button with ping ring */}
+      <div className="relative">
+        {/* Ping ring */}
+        <span
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: "rgba(37,211,102,0.4)",
+            animation: "wa-ping-ring 1.8s ease-out infinite",
+          }}
+        />
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold shadow-2xl transition hover:scale-105 hover:brightness-110"
+          style={{
+            background: "#25D366",
+            color: "#fff",
+            boxShadow: "0 4px 30px rgba(37,211,102,0.5)",
+            animation: "wa-pulse 2s ease-in-out infinite",
+          }}
+        >
+          <span className="text-xl">💬</span>
+          <span>WhatsApp Us</span>
+        </a>
+      </div>
+    </div>
   );
 }
 
