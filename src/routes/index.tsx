@@ -32,7 +32,7 @@ const plans = [
     tag: "30 days of unlimited building",
     cta: "💬 Buy on WhatsApp",
     badge: "Best Value",
-    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+    features: ["No credit limits","No workspace transfer","Priority WhatsApp support","Best for full products & teams","Lowest cost per hour"],
   },
   {
     name: "7 Days Pass",
@@ -40,7 +40,8 @@ const plans = [
     usd: "$14.99",
     tag: "Week-long unlimited access",
     cta: "💬 Buy on WhatsApp",
-    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+    badge: "Popular",
+    features: ["No credit limits","No workspace transfer","Best for multi-day sprints","Great for freelancers","Instant activation"],
   },
   {
     name: "24 Hours Pass",
@@ -48,7 +49,7 @@ const plans = [
     usd: "$4.99",
     tag: "Full-day build marathon",
     cta: "💬 Buy on WhatsApp",
-    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+    features: ["No credit limits","No workspace transfer","Best for hackathons & sprints","Single-day project launch","Instant activation"],
   },
   {
     name: "12 Hours Pass",
@@ -56,7 +57,7 @@ const plans = [
     usd: "$2.99",
     tag: "Half-day builder session",
     cta: "💬 Buy on WhatsApp",
-    features: ["No credit limits","Existing workspace","No workspace transfer","Instant activation"],
+    features: ["No credit limits","No workspace transfer","Best for quick experiments","Try before committing longer","Instant activation"],
   },
 ];
 
@@ -115,13 +116,42 @@ const faqs = [
 
 const WHATSAPP_URL =
   "https://wa.me/917320091112?text=" +
-  encodeURIComponent("Hi! I want to start the 15-minute FREE TRIAL for Lovable Extension. Please send me the trial code.");
+  encodeURIComponent("Hi! Free trial please 🙏");
 
 const WHATSAPP_PHONE_DISPLAY = "+91 73200 91112";
 
 function planWhatsApp(name: string, price: string) {
   return "https://wa.me/917320091112?text=" +
-    encodeURIComponent(`Hi! I want to purchase the ${name} (${price}) for Lovable Extension. Please confirm payment details.`);
+    encodeURIComponent(`Hi! I want to buy the ${name} (${price}). What's the payment link?`);
+}
+
+/* ─── URGENCY TOP BANNER ─────────────────────── */
+function UrgencyBanner() {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
+  return (
+    <div
+      className="relative z-[60] flex items-center justify-center gap-3 px-4 py-2.5 text-xs font-semibold text-center"
+      style={{ background: "linear-gradient(90deg,#d4a017 0%,#f5c518 50%,#d4a017 100%)", color: "#111" }}
+    >
+      <span>🔥 Limited free trial slots this week — claim yours in 2 taps on WhatsApp</span>
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="shrink-0 rounded-full bg-black/20 px-3 py-1 font-bold transition hover:bg-black/30"
+      >
+        Claim Now →
+      </a>
+      <button
+        onClick={() => setVisible(false)}
+        aria-label="Dismiss"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-black/50 hover:text-black"
+      >
+        <X className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  );
 }
 
 /* ─── WHATSAPP INLINE BANNER ─────────────────────── */
@@ -183,19 +213,18 @@ function WhatsAppBanner({ msg = "💬 Chat With Us on WhatsApp — Instant Repli
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <UrgencyBanner />
       <Nav />
       <Hero />
       <TrustBar />
       <HowItWorks />
       <WhatsAppBanner msg="💬 Questions? Chat with Us on WhatsApp — We Reply in Minutes!" />
       <Testimonials />
-      <WhatsAppBanner msg="🎁 Get Your FREE 15-Minute Trial Key Right Now on WhatsApp!" />
       <Pricing />
       <PriceCalculator />
-      <WhatsAppBanner msg="💬 Ready to Order? Message Us on WhatsApp for Instant Activation!" />
       <Setup />
       <FAQ />
-      <WhatsAppBanner msg="🚀 Don't Wait — Start Building Without Limits. Chat on WhatsApp Now!" />
+      <WhatsAppBanner msg="🚀 Ready to Build Without Limits? Message Us on WhatsApp Now!" />
       <CTA />
       <Footer />
       <StickyWhatsApp />
@@ -334,15 +363,20 @@ function Hero() {
 
           {/* headline */}
           <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
-            Unlimited Credits<br />
-            For Lovable.<br />
-            <span style={{ color: "#f5c518" }}>Build Without</span><br />
-            <span style={{ background: "linear-gradient(90deg,#f5c518,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Any Limits.</span>
+            Stop Running Out<br />
+            Of Lovable Credits<br />
+            <span style={{ background: "linear-gradient(90deg,#f5c518,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Mid-Build.</span>
           </h1>
 
           {/* sub */}
           <p className="mt-5 max-w-md text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-            No credit limits. No workspace transfer. Works with your existing workspace.
+            Get unlimited Lovable.dev credits via a Chrome extension. No workspace transfer. Works with your existing projects from ₹349.
+          </p>
+
+          {/* account safety line */}
+          <p className="mt-3 flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <span style={{ color: "#4ade80" }}>🔒</span>
+            Works as a client-side Chrome extension — Lovable's servers never know it's installed.
           </p>
 
           {/* free trial badge */}
@@ -350,41 +384,38 @@ function Hero() {
             className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold"
             style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.3)" }}
           >
-            <Check className="h-3 w-3" /> 15-Minute Free Trial Available
+            <Check className="h-3 w-3" /> 15-Minute Free Trial — No Card Needed
           </div>
-          <p className="mt-2 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
-            Unlock unlimited credit usage for 15 minutes before choosing a plan.
-          </p>
 
-          {/* CTAs */}
+          {/* CTAs — WhatsApp is now primary yellow */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="https://drive.google.com/file/d/1hsWnm3yAfjgqO858xyRsai_YBb9mVP2-/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
-              style={{ background: "#f5c518", color: "#111" }}
-            >
-              <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Extension (ZIP)</span>
-              <span className="text-[10px] font-normal opacity-60">Free 15-Minute Trial Built-In</span>
-            </a>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
-              style={{ background: "rgba(37,211,102,0.12)", border: "1px solid rgba(37,211,102,0.35)", color: "#25d366" }}
+              style={{ background: "#f5c518", color: "#111" }}
             >
-              <span className="flex items-center gap-2">💬 Get Free Trial Key</span>
-              <span className="text-[10px] font-normal opacity-60">Instant WhatsApp Delivery</span>
+              <span className="flex items-center gap-2">💬 Get My Free Trial Key</span>
+              <span className="text-[10px] font-normal opacity-60">Instant WhatsApp · No Card Needed</span>
+            </a>
+            <a
+              href="https://drive.google.com/file/d/1hsWnm3yAfjgqO858xyRsai_YBb9mVP2-/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
+            >
+              <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Extension</span>
+              <span className="text-[10px] font-normal opacity-60">Chrome ZIP · Free Trial Built-In</span>
             </a>
             <a
               href="#setup"
               className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
-              style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
+              style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)" }}
             >
               <span className="flex items-center gap-2"><Play className="h-4 w-4" /> Watch Setup</span>
-              <span className="text-[10px] font-normal opacity-60">2 Min Step-by-Step Video</span>
+              <span className="text-[10px] font-normal opacity-60">2 Min Video</span>
             </a>
           </div>
 
@@ -689,10 +720,10 @@ function Pricing() {
             💰 Transparent Hourly Pricing
           </div>
           <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-            Choose Your Access Pass
+            One-Time Passes. No Subscriptions.
           </h2>
           <p className="mt-4 text-sm text-muted-foreground md:text-base">
-            Hourly rate: <span className="text-primary font-semibold">₹20/hr</span> (India) · <span className="text-primary font-semibold">$0.50/hr</span> (US) · Use the calculator below to estimate your cost.
+            Pay only for what you build. ₹20/hr (India) · $0.50/hr (US) · No recurring charges, cancel anytime.
           </p>
         </div>
       </Reveal>
