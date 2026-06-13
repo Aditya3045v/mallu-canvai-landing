@@ -103,6 +103,14 @@ const faqs = [
     q: "Is support available?",
     a: "Yes, support is included with every plan. Reach us on WhatsApp anytime.",
   },
+  {
+    q: "What payment methods do you accept?",
+    a: "We accept UPI (GPay, PhonePe, Paytm), bank transfer, and other common Indian payment methods. Payment details are shared over WhatsApp after you message us.",
+  },
+  {
+    q: "What is your refund policy?",
+    a: "We offer a 15-minute free trial so you can test before purchasing. Because access keys are delivered digitally and instantly, we do not offer refunds once a pass has been activated. If you face any technical issues, message us on WhatsApp and we will resolve them immediately.",
+  },
 ];
 
 const WHATSAPP_URL =
@@ -211,10 +219,17 @@ function Nav() {
         className="mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-5 py-3"
         style={{ background: "rgba(30,30,30,0.92)", backdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.08)" }}
       >
-        {/* Brand */}
-        <span className="text-lg font-bold tracking-tight text-white">
-          Lovable{" "}<span style={{ color: "#f5c518" }}>Extension</span>
-        </span>
+        {/* Brand / Logo */}
+        <a href="#" className="flex items-center gap-2 text-lg font-bold tracking-tight text-white no-underline">
+          <span
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-base"
+            style={{ background: "linear-gradient(135deg,#f5c518 0%,#d4a017 100%)", color: "#111" }}
+            aria-label="Lovable Extension logo"
+          >
+            ⚡
+          </span>
+          <span>Lovable{" "}<span style={{ color: "#f5c518" }}>Extension</span></span>
+        </a>
 
         {/* Desktop links */}
         <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">
@@ -371,6 +386,29 @@ function Hero() {
               <span className="flex items-center gap-2"><Play className="h-4 w-4" /> Watch Setup</span>
               <span className="text-[10px] font-normal opacity-60">2 Min Step-by-Step Video</span>
             </a>
+          </div>
+
+          {/* ── Social proof stat row (Element 5) ── */}
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <div className="flex items-center gap-2">
+              <span className="font-display text-2xl font-extrabold" style={{ color: "#f5c518" }}>500+</span>
+              <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>Builders<br/>using it</span>
+            </div>
+            <div className="h-8 w-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div className="flex items-center gap-2">
+              <span className="font-display text-2xl font-extrabold" style={{ color: "#4ade80" }}>15 min</span>
+              <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>Free trial<br/>no card</span>
+            </div>
+            <div className="h-8 w-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div className="flex items-center gap-2">
+              <span className="font-display text-2xl font-extrabold text-white">₹349</span>
+              <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>Starts<br/>from</span>
+            </div>
+            <div className="h-8 w-px hidden sm:block" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div className="hidden sm:flex items-center gap-1.5">
+              <span style={{ color: "#f5c518" }}>★★★★★</span>
+              <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>Rated by users</span>
+            </div>
           </div>
         </div>
 
@@ -585,7 +623,19 @@ function Testimonials() {
       author: "Rajesh M.",
       role: "Startup Founder",
       avatar: "⚙️"
-    }
+    },
+    {
+      quote: "Got my trial key in under 2 minutes. By the end of the day I had shipped a full product. The 1 Month Pass is honestly the best investment I've made this year.",
+      author: "Priya N.",
+      role: "Freelance Developer",
+      avatar: "🌟"
+    },
+    {
+      quote: "I was skeptical at first, but the free trial won me over immediately. Zero setup complexity — just install and build.",
+      author: "Karan V.",
+      role: "Product Designer",
+      avatar: "🎨"
+    },
   ];
 
   return (
@@ -1088,22 +1138,95 @@ function StickyWhatsApp() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/50 px-4 py-8 md:px-6 md:py-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center text-xs text-muted-foreground md:flex-row md:text-sm">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-primary" />
-          <span>© {new Date().getFullYear()} Lovable Extension</span>
+    <footer className="border-t border-border/50 px-4 py-10 md:px-6 md:py-14">
+      <div className="mx-auto max-w-7xl">
+        {/* Top row */}
+        <div className="flex flex-col gap-10 md:flex-row md:justify-between">
+
+          {/* Brand col */}
+          <div className="flex flex-col gap-3 max-w-xs">
+            <div className="flex items-center gap-2 text-base font-bold text-white">
+              <span
+                className="flex h-7 w-7 items-center justify-center rounded-md text-sm"
+                style={{ background: "linear-gradient(135deg,#f5c518,#d4a017)", color: "#111" }}
+              >⚡</span>
+              Lovable <span style={{ color: "#f5c518" }}>Extension</span>
+            </div>
+            <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>
+              Unlimited Lovable.dev credits via Chrome extension. No workspace transfer. Instant activation.
+            </p>
+          </div>
+
+          {/* Links cols */}
+          <div className="flex flex-wrap gap-10 text-sm">
+
+            <div className="flex flex-col gap-2">
+              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Quick Links</div>
+              <a href="#" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>Home</a>
+              <a href="#pricing" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>Pricing</a>
+              <a href="#setup" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>Setup Guide</a>
+              <a href="#faq" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>FAQ</a>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Contact</div>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition"
+                style={{ color: "rgba(255,255,255,0.6)" }}
+              >
+                💬 WhatsApp Support
+              </a>
+              <a
+                href="mailto:support@lovableextension.com"
+                className="hover:text-white transition"
+                style={{ color: "rgba(255,255,255,0.6)" }}
+              >
+                ✉️ Email Us
+              </a>
+              <span style={{ color: "rgba(255,255,255,0.6)" }}>📞 {WHATSAPP_PHONE_DISPLAY}</span>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Legal</div>
+              <a
+                href="/privacy-policy"
+                className="hover:text-white transition"
+                style={{ color: "rgba(255,255,255,0.6)" }}
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/terms-of-service"
+                className="hover:text-white transition"
+                style={{ color: "rgba(255,255,255,0.6)" }}
+              >
+                Terms of Service
+              </a>
+              <a
+                href="/refund-policy"
+                className="hover:text-white transition"
+                style={{ color: "rgba(255,255,255,0.6)" }}
+              >
+                Refund Policy
+              </a>
+            </div>
+
+          </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-4 md:gap-5">
-          <span>Need Help?</span>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground"
-          >
-            WhatsApp
-          </a>
+
+        {/* Bottom bar */}
+        <div
+          className="mt-10 flex flex-col items-center justify-between gap-3 border-t pt-6 text-xs md:flex-row"
+          style={{ borderColor: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.3)" }}
+        >
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+            <span>© {new Date().getFullYear()} Lovable Extension. All rights reserved.</span>
+          </div>
+          <span>Made with ⚡ for builders · India 🇮🇳</span>
         </div>
       </div>
     </footer>
