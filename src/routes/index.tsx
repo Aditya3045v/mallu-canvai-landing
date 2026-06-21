@@ -400,7 +400,7 @@ function Hero() {
               <span className="text-[10px] font-normal opacity-60">Instant WhatsApp · No Card Needed</span>
             </a>
             <a
-              href="https://drive.google.com/file/d/1hsWnm3yAfjgqO858xyRsai_YBb9mVP2-/view?usp=sharing"
+              href="https://dl.eklas.dev/latest.zip"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
