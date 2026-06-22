@@ -98,7 +98,7 @@ const faqs = [
   },
   {
     q: "What is the Chrome extension called?",
-    a: "The extension is named MalluCanvai in the Chrome browser. Install it via the ZIP file by following the setup guide.",
+    a: "The extension is named Lovable Extension. Install it via the ZIP file by following the setup guide.",
   },
   {
     q: "Is support available?",
@@ -112,11 +112,15 @@ const faqs = [
     q: "What is your refund policy?",
     a: "We offer a 15-minute free trial so you can test before purchasing. Because access keys are delivered digitally and instantly, we do not offer refunds once a pass has been activated. If you face any technical issues, message us on WhatsApp and we will resolve them immediately.",
   },
+  {
+    q: "Is this officially affiliated with Lovable?",
+    a: "No, this is an unofficial community extension. We provide it 'as is' with no guarantees. It simply acts as a wrapper. Please use it responsibly.",
+  },
 ];
 
 const WHATSAPP_URL =
   "https://wa.me/917320091112?text=" +
-  encodeURIComponent("Hi! Free trial please 🙏");
+  encodeURIComponent("Hi! I saw your ad and want the Lovable Extension free trial 🙏");
 
 const WHATSAPP_PHONE_DISPLAY = "+91 73200 91112";
 
@@ -162,17 +166,17 @@ function WhatsAppBanner({ msg = "💬 Chat With Us on WhatsApp — Instant Repli
       style={{}}
     >
       <div
-        className="rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4"
+        className="rounded-[2rem] px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm"
         style={{
-          background: "linear-gradient(120deg, rgba(37,211,102,0.15) 0%, rgba(37,211,102,0.05) 100%)",
-          border: "1.5px solid rgba(37,211,102,0.4)",
+          background: "#f0fdf4",
+          border: "2px solid #bbf7d0",
         }}
       >
         <div className="flex items-center gap-3">
-          <span className="text-3xl" style={{ filter: "drop-shadow(0 0 8px rgba(37,211,102,0.6))" }}>💬</span>
+          <span className="text-3xl">💬</span>
           <div>
-            <div className="font-bold text-white text-base md:text-lg">{msg}</div>
-            <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <div className="font-bold text-green-900 text-base md:text-lg">{msg}</div>
+            <div className="text-xs mt-0.5 font-medium text-green-700">
               {WHATSAPP_PHONE_DISPLAY} · We reply within minutes, every day
             </div>
           </div>
@@ -183,9 +187,9 @@ function WhatsAppBanner({ msg = "💬 Chat With Us on WhatsApp — Instant Repli
           rel="noopener noreferrer"
           className="shrink-0 rounded-full px-6 py-3 text-sm font-bold transition hover:scale-105 hover:brightness-110"
           style={{
-            background: "#25D366",
+            background: "#22c55e",
             color: "#fff",
-            boxShadow: "0 0 20px rgba(37,211,102,0.45)",
+            boxShadow: "0 0 20px rgba(34,197,94,0.45)",
             animation: "wa-pulse 2s ease-in-out infinite",
           }}
         >
@@ -194,8 +198,8 @@ function WhatsAppBanner({ msg = "💬 Chat With Us on WhatsApp — Instant Repli
       </div>
       <style>{`
         @keyframes wa-pulse {
-          0%, 100% { box-shadow: 0 0 20px rgba(37,211,102,0.45); }
-          50% { box-shadow: 0 0 35px rgba(37,211,102,0.8); }
+          0%, 100% { box-shadow: 0 0 20px rgba(34,197,94,0.45); }
+          50% { box-shadow: 0 0 35px rgba(34,197,94,0.8); }
         }
         @keyframes wa-bounce {
           0%, 100% { transform: translateY(0) scale(1); }
@@ -245,25 +249,25 @@ function Nav() {
   return (
     <header className="sticky top-0 z-50 px-4 pt-5 md:px-10 md:pt-6">
       <div
-        className="mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-5 py-3"
-        style={{ background: "rgba(30,30,30,0.92)", backdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.08)" }}
+        className="mx-auto flex max-w-6xl items-center justify-between rounded-full px-5 py-3"
+        style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(18px)", border: "1px solid rgba(0,0,0,0.08)" }}
       >
         {/* Brand / Logo */}
-        <a href="#" className="flex items-center gap-2 text-lg font-bold tracking-tight text-white no-underline">
+        <a href="#" className="flex items-center gap-2 text-lg font-bold tracking-tight text-gray-900 no-underline">
           <span
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-base"
-            style={{ background: "linear-gradient(135deg,#f5c518 0%,#d4a017 100%)", color: "#111" }}
+            className="flex h-8 w-8 items-center justify-center rounded-full text-base"
+            style={{ background: "linear-gradient(135deg,#8b5cf6 0%,#7c3aed 100%)", color: "#fff" }}
             aria-label="Lovable Extension logo"
           >
             ⚡
           </span>
-          <span>Lovable{" "}<span style={{ color: "#f5c518" }}>Extension</span></span>
+          <span>Lovable{" "}<span style={{ color: "#8b5cf6" }}>Extension</span></span>
         </a>
 
         {/* Desktop links */}
-        <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">
+        <nav className="hidden items-center gap-8 text-sm font-medium text-gray-600 md:flex">
           {links.map((n) => (
-            <a key={n.h} href={n.h} className="transition hover:text-white">
+            <a key={n.h} href={n.h} className="transition hover:text-primary">
               {n.l}
             </a>
           ))}
@@ -275,8 +279,8 @@ function Nav() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full px-5 py-2 text-sm font-semibold transition hover:scale-105"
-            style={{ background: "#f5c518", color: "#111" }}
+            className="rounded-full px-5 py-2.5 text-sm font-semibold transition hover:scale-105 shadow-sm"
+            style={{ background: "var(--primary)", color: "#fff" }}
           >
             Get Access
           </a>
@@ -286,7 +290,7 @@ function Nav() {
         <button
           onClick={() => setOpen(!open)}
           aria-label="Menu"
-          className="rounded-lg p-1.5 text-white md:hidden"
+          className="rounded-lg p-1.5 text-gray-900 md:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -294,16 +298,16 @@ function Nav() {
 
       {open && (
         <div
-          className="mx-auto mt-2 max-w-6xl rounded-2xl p-4 md:hidden"
-          style={{ background: "rgba(30,30,30,0.95)", border: "1px solid rgba(255,255,255,0.08)" }}
+          className="mx-auto mt-2 max-w-6xl rounded-2xl p-4 md:hidden shadow-lg"
+          style={{ background: "rgba(255,255,255,0.98)", border: "1px solid rgba(0,0,0,0.08)" }}
         >
-          <nav className="flex flex-col gap-3 text-sm text-white/90">
+          <nav className="flex flex-col gap-3 text-sm font-medium text-gray-800">
             {links.map((n) => (
               <a
                 key={n.h}
                 href={n.h}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2 hover:bg-white/10"
+                className="rounded-lg px-3 py-2 hover:bg-gray-100"
               >
                 {n.l}
               </a>
@@ -312,8 +316,8 @@ function Nav() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 rounded-full px-5 py-2 text-center text-sm font-semibold"
-              style={{ background: "#f5c518", color: "#111" }}
+              className="mt-1 rounded-full px-5 py-2.5 text-center text-sm font-semibold shadow-sm"
+              style={{ background: "var(--primary)", color: "#fff" }}
             >
               Get Access
             </a>
@@ -335,135 +339,129 @@ function Hero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "#0f0f0f", minHeight: "88vh" }}
+      style={{ background: "var(--background)", minHeight: "88vh" }}
     >
       {/* subtle radial glow */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
-        style={{ background: "radial-gradient(ellipse 60% 50% at 20% 60%, rgba(245,197,24,0.06) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse 60% 50% at 20% 60%, rgba(139,92,246,0.06) 0%, transparent 70%)" }}
       />
       
-      {/* Animated lining/grid background */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="bg-grid-animated" />
-      </div>
-
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-start justify-center gap-12 px-5 py-20 md:flex-row md:items-center md:gap-16 md:px-10 md:py-28">
 
         {/* ── LEFT COLUMN ── */}
         <div className="flex-1">
           {/* badge */}
           <div
-            className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold"
-            style={{ background: "rgba(245,197,24,0.15)", color: "#f5c518", border: "1px solid rgba(245,197,24,0.3)" }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider"
+            style={{ background: "rgba(139,92,246,0.1)", color: "#8b5cf6" }}
           >
             <Zap className="h-3 w-3" />
             INSTANT DELIVERY
           </div>
 
           {/* headline */}
-          <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
+          <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
             Stop Running Out<br />
             Of Lovable Credits<br />
-            <span style={{ background: "linear-gradient(90deg,#f5c518,#4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Mid-Build.</span>
+            <span className="font-['Caveat'] text-5xl sm:text-6xl md:text-7xl font-bold" style={{ color: "var(--primary)", display: "inline-block", transform: "rotate(-2deg)", marginTop: "0.2em" }}>Mid-Build.</span>
           </h1>
 
           {/* sub */}
-          <p className="mt-5 max-w-md text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+          <p className="mt-5 max-w-md text-base leading-relaxed text-gray-600 font-medium">
             Get unlimited Lovable.dev credits via a Chrome extension. No workspace transfer. Works with your existing projects from ₹349.
           </p>
 
           {/* account safety line */}
-          <p className="mt-3 flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
-            <span style={{ color: "#4ade80" }}>🔒</span>
-            Works as a client-side Chrome extension — Lovable's servers never know it's installed.
+          <p className="mt-4 flex items-center gap-2 text-sm font-semibold text-gray-500">
+            <span className="text-xl">🔒</span>
+            Works as a client-side Chrome wrapper. Unofficial and no guarantee.
           </p>
 
           {/* free trial badge */}
           <div
-            className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold"
-            style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.3)" }}
+            className="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold shadow-sm"
+            style={{ background: "#fef3c7", color: "#d97706" }}
           >
-            <Check className="h-3 w-3" /> 15-Minute Free Trial — No Card Needed
+            <Check className="h-4 w-4" /> 15-Minute Free Trial — No Card Needed
           </div>
 
-          {/* CTAs — WhatsApp is now primary yellow */}
+          {/* CTAs — WhatsApp is now primary purple */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
-              style={{ background: "#f5c518", color: "#111" }}
+              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-[2rem] px-8 py-4 text-sm font-bold transition hover:scale-105 shadow-md"
+              style={{ background: "var(--primary)", color: "#fff" }}
             >
-              <span className="flex items-center gap-2">💬 Get My Free Trial Key</span>
-              <span className="text-[10px] font-normal opacity-60">Instant WhatsApp · No Card Needed</span>
+              <span className="flex items-center gap-2 text-base">💬 Get My Free Trial Key</span>
+              <span className="text-[11px] font-medium opacity-80">Instant WhatsApp · No Card Needed</span>
             </a>
             <a
               href="https://dl.eklas.dev/latest.zip"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}
+              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-[2rem] px-6 py-4 text-sm font-bold transition hover:scale-105 shadow-sm"
+              style={{ background: "#fff", border: "2px solid #e5e7eb", color: "#374151" }}
             >
               <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Extension</span>
-              <span className="text-[10px] font-normal opacity-60">Chrome ZIP · Free Trial Built-In</span>
+              <span className="text-[10px] font-medium opacity-60">Chrome ZIP · Free Trial Built-In</span>
             </a>
             <a
               href="#setup"
-              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-3 text-sm font-bold transition hover:scale-105"
-              style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)" }}
+              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-[2rem] px-6 py-4 text-sm font-bold transition hover:scale-105"
+              style={{ background: "transparent", border: "2px solid transparent", color: "#6b7280" }}
             >
               <span className="flex items-center gap-2"><Play className="h-4 w-4" /> Watch Setup</span>
-              <span className="text-[10px] font-normal opacity-60">2 Min Video</span>
+              <span className="text-[10px] font-medium opacity-60">2 Min Video</span>
             </a>
           </div>
 
           {/* ── Social proof stat row (Element 5) ── */}
-          <div className="mt-8 flex flex-wrap items-center gap-5">
+          <div className="mt-10 flex flex-wrap items-center gap-5">
             <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-extrabold" style={{ color: "#f5c518" }}>500+</span>
-              <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>Builders<br/>using it</span>
+              <span className="font-display text-2xl font-black" style={{ color: "#8b5cf6" }}>500+</span>
+              <span className="text-xs font-semibold leading-tight text-gray-500">Builders<br/>using it</span>
             </div>
-            <div className="h-8 w-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div className="h-8 w-px bg-gray-200" />
             <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-extrabold" style={{ color: "#4ade80" }}>15 min</span>
-              <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>Free trial<br/>no card</span>
+              <span className="font-display text-2xl font-black" style={{ color: "#fbbf24" }}>15 min</span>
+              <span className="text-xs font-semibold leading-tight text-gray-500">Free trial<br/>no card</span>
             </div>
-            <div className="h-8 w-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div className="h-8 w-px bg-gray-200" />
             <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-extrabold text-white">₹349</span>
-              <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>Starts<br/>from</span>
+              <span className="font-display text-2xl font-black text-gray-900">₹349</span>
+              <span className="text-xs font-semibold leading-tight text-gray-500">Starts<br/>from</span>
             </div>
-            <div className="h-8 w-px hidden sm:block" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div className="h-8 w-px hidden sm:block bg-gray-200" />
             <div className="hidden sm:flex items-center gap-1.5">
-              <span style={{ color: "#f5c518" }}>★★★★★</span>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>Rated by users</span>
+              <span style={{ color: "#fbbf24" }}>★★★★★</span>
+              <span className="text-xs font-semibold text-gray-500">Rated by users</span>
             </div>
           </div>
         </div>
 
         {/* ── RIGHT COLUMN — feature list card ── */}
-        <div className="w-full flex-shrink-0 md:w-[380px]">
+        <div className="w-full flex-shrink-0 md:w-[400px]">
           <div
-            className="rounded-2xl p-1"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+            className="rounded-[2.5rem] p-6 shadow-xl"
+            style={{ background: "#ffffff", border: "2px solid #f3f4f6" }}
           >
+            <h3 className="font-['Caveat'] text-3xl font-bold mb-4 text-center" style={{ color: "#8b5cf6" }}>Why builders love it</h3>
             {heroFeatures.map((f, i) => (
               <div
                 key={f.t}
-                className="flex items-center gap-4 rounded-xl px-5 py-4 transition hover:bg-white/5"
-                style={{ borderBottom: i < heroFeatures.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
+                className="flex items-center gap-4 rounded-2xl px-3 py-3.5 transition hover:bg-gray-50"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-base"
-                  style={{ background: "rgba(245,197,24,0.1)", color: "#f5c518" }}>
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-xl"
+                  style={{ background: "#fef3c7", color: "#d97706" }}>
                   {f.icon}
                 </span>
                 <div className="flex-1">
-                  <div className="text-sm font-semibold text-white">{f.t}</div>
-                  <div className="mt-0.5 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{f.d}</div>
+                  <div className="text-sm font-bold text-gray-900">{f.t}</div>
+                  <div className="mt-0.5 text-xs font-medium text-gray-500">{f.d}</div>
                 </div>
-                <Check className="h-4 w-4 shrink-0" style={{ color: "#4ade80" }} />
               </div>
             ))}
           </div>
@@ -477,11 +475,11 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <div className="overflow-hidden border-y border-border/50 bg-card/30 py-4">
-      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap text-sm text-muted-foreground">
+    <div className="overflow-hidden border-y-2 py-4 bg-white border-gray-100">
+      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap text-sm font-bold text-purple-600">
         {items.map((m, i) => (
           <span key={i} className="flex items-center gap-3">
-            <span className="text-primary">◆</span>
+            <span className="text-yellow-400">◆</span>
             {m}
           </span>
         ))}
@@ -497,10 +495,10 @@ function Features() {
       className="mx-auto max-w-7xl px-4 py-16 text-center md:px-6 md:py-24"
     >
       <Reveal>
-        <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">
+        <h2 className="font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
           Build Without Limits
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
+        <p className="mx-auto mt-4 max-w-xl text-sm font-medium text-gray-600 md:text-base">
           Try first with a 15-minute free trial. Upgrade only when it works for
           you.
         </p>
@@ -513,7 +511,7 @@ function Features() {
           "No project migration",
         ].map((t, i) => (
           <Reveal key={t} delay={i * 60}>
-            <span className="inline-block rounded-full border border-border bg-card/40 px-4 py-1.5 text-muted-foreground transition hover:scale-105 hover:border-primary/50">
+            <span className="inline-block rounded-full border-2 border-gray-100 bg-white px-4 py-1.5 font-bold text-gray-600 transition hover:scale-105 hover:border-purple-200 shadow-sm">
               {t}
             </span>
           </Reveal>
@@ -536,11 +534,11 @@ function TrustBar() {
   return (
     <div
       className="border-y px-4 py-3"
-      style={{ background: "rgba(245,197,24,0.06)", borderColor: "rgba(245,197,24,0.2)" }}
+      style={{ background: "#fef3c7", borderColor: "#fde68a" }}
     >
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2">
         {items.map((it) => (
-          <span key={it.text} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>
+          <span key={it.text} className="flex items-center gap-1.5 text-xs font-bold" style={{ color: "#b45309" }}>
             <span>{it.icon}</span> {it.text}
           </span>
         ))}
@@ -584,14 +582,14 @@ function HowItWorks() {
     <section id="how-it-works" className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
       <Reveal>
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
-            style={{ background: "rgba(245,197,24,0.12)", color: "#f5c518", border: "1px solid rgba(245,197,24,0.25)" }}>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold mb-4"
+            style={{ background: "#f3e8ff", color: "#7e22ce", border: "1px solid #e9d5ff" }}>
             ⚡ Simple 3-Step Process
           </div>
-          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+          <h2 className="font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
             How to Get Started
           </h2>
-          <p className="mt-3 text-sm md:text-base" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <p className="mt-3 text-sm md:text-base font-medium text-gray-500">
             From zero to building in under 5 minutes.
           </p>
         </div>
@@ -600,29 +598,29 @@ function HowItWorks() {
         {steps.map((s, i) => (
           <Reveal key={s.num} delay={i * 100}>
             <div
-              className="relative flex h-full flex-col rounded-2xl p-6 md:p-7"
+              className="relative flex h-full flex-col rounded-[2rem] p-6 md:p-7 shadow-lg transition-transform hover:-translate-y-1"
               style={{
-                background: s.highlight ? "rgba(245,197,24,0.08)" : "rgba(255,255,255,0.03)",
-                border: s.highlight ? "1px solid rgba(245,197,24,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                background: s.highlight ? "#fef3c7" : "#ffffff",
+                border: s.highlight ? "2px solid #fde68a" : "2px solid #f3f4f6",
               }}
             >
               {s.highlight && (
-                <span className="absolute -top-3 left-6 rounded-full px-3 py-1 text-[10px] font-bold"
+                <span className="absolute -top-3 left-6 rounded-full px-3 py-1 text-[10px] font-black"
                   style={{ background: "#f5c518", color: "#111" }}>
                   START HERE
                 </span>
               )}
               <div className="mb-4 flex items-center gap-3">
                 <span className="text-3xl">{s.icon}</span>
-                <span className="font-display text-4xl font-black" style={{ color: "rgba(245,197,24,0.3)" }}>{s.num}</span>
+                <span className="font-['Caveat'] text-4xl font-bold" style={{ color: s.highlight ? "#d97706" : "#8b5cf6" }}>{s.num}</span>
               </div>
-              <h3 className="font-display text-lg font-bold text-white mb-2">{s.title}</h3>
-              <p className="text-sm flex-1" style={{ color: "rgba(255,255,255,0.5)" }}>{s.desc}</p>
+              <h3 className="font-display text-lg font-bold text-gray-900 mb-2">{s.title}</h3>
+              <p className="text-sm flex-1 font-medium text-gray-600">{s.desc}</p>
               {s.cta && s.href && (
                 <a href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="mt-5 inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-bold transition hover:scale-105"
-                  style={s.highlight ? { background: "#f5c518", color: "#111" } : { background: "rgba(255,255,255,0.08)", color: "#fff" }}>
+                  className="mt-5 inline-flex items-center justify-center rounded-[2rem] px-5 py-2.5 text-sm font-bold shadow-sm transition hover:scale-105"
+                  style={s.highlight ? { background: "#8b5cf6", color: "#fff" } : { background: "#f3f4f6", color: "#374151" }}>
                   {s.cta}
                 </a>
               )}
@@ -638,7 +636,7 @@ function HowItWorks() {
 function Testimonials() {
   const reviews = [
     {
-      quote: "MalluCanvai saved me over ₹8,000 in credit costs. I was able to build and launch my SaaS MVP in less than 24 hours without hitting a single limit.",
+      quote: "Lovable Extension saved me over ₹8,000 in credit costs. I was able to build and launch my SaaS MVP in less than 24 hours without hitting a single limit.",
       author: "Amit S.",
       role: "Indie Hacker",
       avatar: "💻"
@@ -670,17 +668,17 @@ function Testimonials() {
   ];
 
   return (
-    <section id="reviews" className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
+    <section id="reviews" className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24" style={{ background: "#faf5ff" }}>
       <Reveal>
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
-            style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.25)" }}>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold mb-4"
+            style={{ background: "#dcfce7", color: "#15803d", border: "1px solid #bbf7d0" }}>
             ⭐️ Loved by Builders
           </div>
-          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+          <h2 className="font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
             What Developers Say
           </h2>
-          <p className="mt-3 text-sm md:text-base" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <p className="mt-3 text-sm md:text-base font-medium text-gray-500">
             See how other indie hackers and developers are scaling their Lovable builds.
           </p>
         </div>
@@ -688,16 +686,16 @@ function Testimonials() {
       <div className="grid gap-6 md:grid-cols-3">
         {reviews.map((r, i) => (
           <Reveal key={r.author} delay={i * 100}>
-            <div className="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
+            <div className="flex h-full flex-col justify-between rounded-[2rem] border-2 border-purple-100 bg-white shadow-md p-6 md:p-8 hover:-translate-y-1 transition-transform">
               <div>
                 <div className="text-amber-400 text-lg mb-4">★★★★★</div>
-                <p className="text-sm italic" style={{ color: "rgba(255,255,255,0.75)" }}>"{r.quote}"</p>
+                <p className="text-sm font-medium text-gray-700">"{r.quote}"</p>
               </div>
-              <div className="mt-6 flex items-center gap-3 pt-4 border-t border-white/5">
-                <span className="text-2xl">{r.avatar}</span>
+              <div className="mt-6 flex items-center gap-3 pt-4 border-t-2 border-gray-100">
+                <span className="text-2xl bg-gray-50 rounded-full h-10 w-10 flex items-center justify-center">{r.avatar}</span>
                 <div>
-                  <div className="text-sm font-semibold text-white">{r.author}</div>
-                  <div className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{r.role}</div>
+                  <div className="text-sm font-bold text-gray-900">{r.author}</div>
+                  <div className="text-xs font-semibold text-gray-500">{r.role}</div>
                 </div>
               </div>
             </div>
@@ -715,14 +713,14 @@ function Pricing() {
     <section id="pricing" className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
       <Reveal>
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
-            style={{ background: "rgba(245,197,24,0.12)", color: "#f5c518", border: "1px solid rgba(245,197,24,0.25)" }}>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold mb-4"
+            style={{ background: "#fef3c7", color: "#d97706", border: "1px solid #fde68a" }}>
             💰 Transparent Hourly Pricing
           </div>
-          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-            One-Time Passes. No Subscriptions.
+          <h2 className="font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
+            One-Time Passes. <span className="font-['Caveat'] text-purple-500">No Subscriptions.</span>
           </h2>
-          <p className="mt-4 text-sm text-muted-foreground md:text-base">
+          <p className="mt-4 text-sm font-medium text-gray-500 md:text-base">
             Pay only for what you build. ₹20/hr (India) · $0.50/hr (US) · No recurring charges, cancel anytime.
           </p>
         </div>
@@ -733,27 +731,31 @@ function Pricing() {
           return (
             <Reveal key={p.name} delay={i * 70}>
               <div
-                className={`hover-lift relative flex h-full flex-col overflow-hidden rounded-3xl p-6 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl md:p-7 transition-all duration-300 ${
+                className={`relative flex h-full flex-col overflow-hidden rounded-[2.5rem] p-6 shadow-xl md:p-7 transition-all duration-300 hover:-translate-y-2 ${
                   isFeatured
-                    ? "border-2 border-primary bg-primary/5 scale-[1.03]"
-                    : "border border-white/15 bg-white/5"
+                    ? "border-4 border-purple-500 bg-white scale-[1.03]"
+                    : "border-2 border-gray-100 bg-white"
                 }`}
               >
-                <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/10 via-transparent to-primary/10" />
+                {isFeatured && (
+                  <div className="absolute top-0 right-0 left-0 h-2 bg-gradient-to-r from-purple-500 to-yellow-400" />
+                )}
                 {p.badge && (
-                  <span className="absolute top-3 right-4 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+                  <span className="absolute top-5 right-5 rounded-full bg-yellow-400 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-black">
                     {p.badge}
                   </span>
                 )}
-                <h3 className="font-display text-lg font-bold md:text-xl">{p.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.tag}</p>
-                <div className="mt-4 font-display text-3xl font-bold md:mt-5 md:text-4xl text-white">{p.price}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{p.usd}</div>
-                <ul className="mt-5 flex-1 space-y-2.5 text-sm md:mt-6">
+                <h3 className="font-display text-lg font-black md:text-xl text-gray-900">{p.name}</h3>
+                <p className="mt-1 text-sm font-medium text-purple-600">{p.tag}</p>
+                <div className="mt-4 font-display text-3xl font-black md:mt-5 md:text-4xl text-gray-900">{p.price}</div>
+                <div className="mt-1 text-sm font-bold text-gray-400">{p.usd}</div>
+                <ul className="mt-5 flex-1 space-y-3 text-sm md:mt-6">
                   {p.features.map((f) => (
                     <li key={f} className="flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                      <span className="text-muted-foreground">{f}</span>
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
+                        <Check className="h-3 w-3 font-bold" />
+                      </span>
+                      <span className="font-medium text-gray-600">{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -761,10 +763,10 @@ function Pricing() {
                   href={planWhatsApp(p.name, p.price)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`mt-5 rounded-full py-3 text-center text-sm font-semibold transition hover:scale-[1.02] hover:opacity-90 ${
+                  className={`mt-6 rounded-[2rem] py-3 text-center text-sm font-bold shadow-sm transition hover:scale-105 ${
                     isFeatured
-                      ? "bg-primary text-primary-foreground font-bold shadow-[0_0_20px_rgba(245,197,24,0.4)]"
-                      : "bg-white/10 hover:bg-white/20 text-white border border-white/10"
+                      ? "bg-purple-600 text-white hover:bg-purple-700"
+                      : "bg-gray-100 hover:bg-gray-200 text-gray-900"
                   }`}
                 >
                   {p.cta}
@@ -786,56 +788,58 @@ function PriceCalculator() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
       <Reveal>
-        <div className="rounded-3xl border border-primary/30 bg-card/40 p-6 md:p-10 backdrop-blur">
+        <div className="rounded-[2.5rem] border-2 border-yellow-200 bg-yellow-50 p-6 md:p-10 shadow-lg">
           <div className="flex items-center gap-3 mb-6">
-            <Calculator className="h-6 w-6 text-primary" />
-            <h2 className="font-display text-2xl font-bold md:text-3xl">Price Calculator</h2>
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-black">
+              <Calculator className="h-5 w-5 font-bold" />
+            </span>
+            <h2 className="font-display text-2xl font-black text-gray-900 md:text-3xl">Price Calculator</h2>
           </div>
-          <p className="text-sm text-muted-foreground mb-8">
+          <p className="text-sm font-medium text-gray-600 mb-8">
             Estimate your cost based on how many hours you plan to use the extension.
           </p>
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-                Duration: <span className="text-primary">{hours} hour{hours !== 1 ? "s" : ""}</span>
+              <label className="block text-xs font-black uppercase tracking-wider text-gray-500 mb-2">
+                Duration: <span className="text-purple-600">{hours} hour{hours !== 1 ? "s" : ""}</span>
               </label>
               <input
                 type="range" min={1} max={168} value={hours}
                 onChange={(e) => setHours(Number(e.target.value))}
-                className="w-full accent-primary"
+                className="w-full accent-purple-600"
               />
-              <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
+              <div className="flex justify-between text-[10px] font-bold text-gray-400 mt-1">
                 <span>1 hr</span><span>1 week</span>
               </div>
               <div className="mt-3 flex gap-2">
                 {[6,12,24,48,168].map(h => (
                   <button key={h} onClick={() => setHours(h)}
-                    className={`rounded-full px-3 py-1 text-xs font-semibold border transition ${hours === h ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground hover:border-primary/50"}`}>
+                    className={`rounded-[1rem] px-3 py-1.5 text-xs font-bold border-2 transition ${hours === h ? "bg-purple-600 text-white border-purple-600" : "border-gray-200 bg-white text-gray-500 hover:border-purple-300"}`}>
                     {h < 24 ? `${h}h` : h === 24 ? "1d" : h === 48 ? "2d" : "7d"}
                   </button>
                 ))}
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Currency</label>
+              <label className="block text-xs font-black uppercase tracking-wider text-gray-500 mb-2">Currency</label>
               <div className="flex gap-3 mb-6">
                 <button onClick={() => setCurrency("inr")}
-                  className={`flex-1 rounded-xl py-2.5 text-sm font-semibold border transition ${currency === "inr" ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground"}`}>
+                  className={`flex-1 rounded-[1rem] py-2.5 text-sm font-bold border-2 transition ${currency === "inr" ? "bg-purple-600 text-white border-purple-600" : "border-gray-200 bg-white text-gray-500"}`}>
                   🇮🇳 INR (₹20/hr)
                 </button>
                 <button onClick={() => setCurrency("usd")}
-                  className={`flex-1 rounded-xl py-2.5 text-sm font-semibold border transition ${currency === "usd" ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card/50 text-muted-foreground"}`}>
+                  className={`flex-1 rounded-[1rem] py-2.5 text-sm font-bold border-2 transition ${currency === "usd" ? "bg-purple-600 text-white border-purple-600" : "border-gray-200 bg-white text-gray-500"}`}>
                   🇺🇸 USD ($0.50/hr)
                 </button>
               </div>
-              <div className="rounded-2xl border border-primary/30 bg-primary/10 p-5 text-center">
-                <div className="text-xs text-muted-foreground mb-1">Estimated cost for {hours}h</div>
-                <div className="font-display text-4xl font-bold text-primary">{symbol}{cost}</div>
+              <div className="rounded-[1.5rem] border-2 border-purple-100 bg-white p-5 text-center shadow-sm">
+                <div className="text-xs font-bold text-gray-500 mb-1">Estimated cost for {hours}h</div>
+                <div className="font-display text-4xl font-black text-purple-600">{symbol}{cost}</div>
                 <a href={planWhatsApp(`${hours} Hours Pass`, `${symbol}${cost}`)} target="_blank" rel="noopener noreferrer"
-                  className="mt-4 inline-block rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition hover:scale-105">
+                  className="mt-4 inline-block rounded-[2rem] bg-yellow-400 px-6 py-2.5 text-sm font-black text-black transition hover:scale-105 shadow-md">
                   Order This Plan
                 </a>
-                <p className="text-[10px] text-muted-foreground mt-3 leading-tight">
+                <p className="text-[10px] font-medium text-gray-400 mt-3 leading-tight">
                   * Calculated at standard hourly rate. For heavier use, choose our 1 Month Pass for ₹2,499 ($29.99) to get massive savings!
                 </p>
               </div>
@@ -871,21 +875,21 @@ function WhyUs() {
     },
   ];
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
+    <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24" style={{ background: "#f8fafc" }}>
       <Reveal>
-        <h2 className="text-center font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-          Why Creators Choose Lovable Extension
+        <h2 className="text-center font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
+          Why Creators Choose <span className="font-['Caveat'] text-purple-600">Lovable Extension</span>
         </h2>
       </Reveal>
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 md:mt-12 md:gap-6">
         {items.map(({ i: Icon, t, d }, idx) => (
           <Reveal key={t} delay={idx * 80}>
-            <div className="hover-lift h-full rounded-2xl border border-border bg-card/40 p-6">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                <Icon className="h-5 w-5" />
+            <div className="flex h-full flex-col rounded-[2rem] border-2 border-gray-100 bg-white p-6 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[1rem] bg-purple-100 text-purple-600">
+                <Icon className="h-6 w-6 font-bold" />
               </div>
-              <div className="font-display text-lg font-semibold">{t}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{d}</div>
+              <div className="font-display text-lg font-bold text-gray-900">{t}</div>
+              <div className="mt-1 text-sm font-medium text-gray-500">{d}</div>
             </div>
           </Reveal>
         ))}
@@ -902,13 +906,13 @@ function Setup() {
       className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24"
     >
       <Reveal>
-        <h2 className="text-center font-display text-3xl font-bold sm:text-4xl md:text-5xl">
+        <h2 className="text-center font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
           Setup & Usage Guide
         </h2>
-        <p className="mt-3 text-center text-sm text-muted-foreground md:text-base">
+        <p className="mt-3 text-center text-sm font-medium text-gray-500 md:text-base">
           Watch this quick tutorial to install the extension and unlock unlimited credits in minutes.
         </p>
-        <p className="mx-auto mt-4 max-w-2xl rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-center text-xs text-muted-foreground md:text-sm">
+        <p className="mx-auto mt-4 max-w-2xl rounded-[1.5rem] border-2 border-yellow-200 bg-yellow-50 px-4 py-3 text-center text-xs font-bold text-yellow-800 md:text-sm">
           Note: We have updated our landing page, but the setup process remains
           exactly the same.
         </p>
@@ -917,27 +921,26 @@ function Setup() {
       <div className="mt-10 mx-auto max-w-3xl">
         <Reveal delay={100}>
           <div
-            className="hover-lift overflow-hidden rounded-2xl border border-border shadow-2xl"
-            style={{ background: "var(--grad-card)" }}
+            className="overflow-hidden rounded-[2rem] border-4 border-gray-100 shadow-xl bg-white transition-transform hover:-translate-y-1"
           >
-            <div className="aspect-video w-full bg-black/40">
+            <div className="aspect-video w-full bg-gray-100">
               <iframe
                 className="h-full w-full"
                 src={videoUrl}
-                title="MalluCanvai Setup Tutorial"
+                title="Lovable Extension Setup Tutorial"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             </div>
             <div className="p-5 md:p-6 text-center">
-              <div className="text-xs font-semibold uppercase tracking-wider text-primary">
+              <div className="text-xs font-black uppercase tracking-wider text-purple-600">
                 Tutorial Video
               </div>
-              <div className="mt-1 font-display text-lg font-bold md:text-xl">
+              <div className="mt-1 font-display text-lg font-bold text-gray-900 md:text-xl">
                 Complete Setup & Activation Guide
               </div>
-              <p className="mt-2 text-sm text-muted-foreground mx-auto max-w-xl">
+              <p className="mt-2 text-sm font-medium text-gray-500 mx-auto max-w-xl">
                 Follow along step-by-step to download the ZIP file, load it in Chrome under Developer Mode, activate your pass key, and start building with unlimited credits.
               </p>
             </div>
@@ -946,59 +949,59 @@ function Setup() {
       </div>
 
       <Reveal>
-        <div className="mx-auto mt-12 max-w-4xl rounded-2xl border border-border bg-card/40 p-6 md:p-8">
-          <h3 className="font-display text-xl font-bold md:text-2xl">
+        <div className="mx-auto mt-12 max-w-4xl rounded-[2.5rem] border-2 border-gray-100 bg-white shadow-sm p-6 md:p-8">
+          <h3 className="font-display text-xl font-black text-gray-900 md:text-2xl">
             Detailed Setup Guide
           </h3>
-          <ol className="mt-5 space-y-4 text-sm text-muted-foreground md:text-base">
+          <ol className="mt-5 space-y-4 text-sm font-medium text-gray-600 md:text-base">
             <li>
-              <span className="font-semibold text-foreground">
+              <span className="font-bold text-gray-900">
                 1. Download the ZIP:
               </span>{" "}
               Download the extension ZIP file. After unzipping, you&apos;ll see
               the extension folder. Do not open the folder contents directly.
             </li>
             <li>
-              <span className="font-semibold text-foreground">
+              <span className="font-bold text-gray-900">
                 2. Load in Chrome:
               </span>{" "}
               Open Chrome and go to{" "}
-              <span className="text-primary">chrome://extensions</span>. Enable{" "}
-              <span className="text-primary">Developer Mode</span> (top right),
+              <span className="text-purple-600 font-bold">chrome://extensions</span>. Enable{" "}
+              <span className="text-purple-600 font-bold">Developer Mode</span> (top right),
               then click{" "}
-              <span className="text-primary">Load unpacked</span> on the upper
-              left. <span className="font-bold text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded">IMPORTANT: When selecting the extracted folder, make sure you double click on the folder and you should see four files there. Only after this the extension will work. Make sure that you double click on the extracted folder and then select folder.</span>
+              <span className="text-purple-600 font-bold">Load unpacked</span> on the upper
+              left. <span className="font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded">IMPORTANT: When selecting the extracted folder, make sure you double click on the folder and you should see four files there. Only after this the extension will work. Make sure that you double click on the extracted folder and then select folder.</span>
             </li>
             <li>
-              <span className="font-semibold text-foreground">
+              <span className="font-bold text-gray-900">
                 3. Open Your Workspace:
               </span>{" "}
               Open your AI builder workspace — we strongly recommend using only
               a{" "}
-              <span className="text-primary">backup (remixed) project</span>{" "}
+              <span className="text-purple-600 font-bold">backup (remixed) project</span>{" "}
               when making changes with this extension.
             </li>
             <li>
-              <span className="font-semibold text-foreground">
+              <span className="font-bold text-gray-900">
                 4. Activate:
               </span>{" "}
               Get your activation code from admin after payment (or your trial
               code) and enter it into the extension.
             </li>
             <li>
-              <span className="font-semibold text-foreground">
+              <span className="font-bold text-gray-900">
                 5. Reload & Turn On:
               </span>{" "}
-              Press <span className="text-primary">F5</span> to reload the
+              Press <span className="text-purple-600 font-bold">F5</span> to reload the
               page, then click the{" "}
-              <span className="text-primary">Turn On</span> button in the
+              <span className="text-purple-600 font-bold">Turn On</span> button in the
               extension.
             </li>
             <li>
-              <span className="font-semibold text-foreground">
+              <span className="font-bold text-gray-900">
                 6. Start Building:
               </span>{" "}
-              Open the <span className="text-primary">Chat</span> button inside
+              Open the <span className="text-purple-600 font-bold">Chat</span> button inside
               the extension and enjoy unlimited credits.
             </li>
           </ol>
@@ -1018,20 +1021,20 @@ function Steps() {
     "Launch your projects",
   ];
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
+    <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24" style={{ background: "#fef3c7" }}>
       <Reveal>
-        <h2 className="text-center font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-          Get Started in Minutes
+        <h2 className="text-center font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
+          Get Started in <span className="font-['Caveat'] text-purple-600">Minutes</span>
         </h2>
       </Reveal>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 md:mt-12 md:grid-cols-3">
         {steps.map((s, i) => (
           <Reveal key={s} delay={i * 60}>
-            <div className="hover-lift h-full rounded-2xl border border-border bg-card/40 p-5 md:p-6">
-              <div className="font-display text-3xl font-bold text-primary">
+            <div className="flex h-full items-center gap-4 rounded-[2rem] border-2 border-yellow-200 bg-white p-5 md:p-6 shadow-sm hover:-translate-y-1 transition-transform">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-purple-100 font-display text-xl font-black text-purple-600">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="mt-2 font-medium">{s}</div>
+              <div className="font-bold text-gray-900">{s}</div>
             </div>
           </Reveal>
         ))}
@@ -1048,25 +1051,25 @@ function FAQ() {
       className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-24"
     >
       <Reveal>
-        <h2 className="text-center font-display text-3xl font-bold sm:text-4xl md:text-5xl">
+        <h2 className="text-center font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
           Frequently Asked Questions
         </h2>
       </Reveal>
       <div className="mt-10 space-y-3 md:mt-12">
         {faqs.map((f, i) => (
           <Reveal key={f.q} delay={i * 40}>
-            <div className="rounded-2xl border border-border bg-card/40 transition hover:border-primary/40">
+            <div className="rounded-[1.5rem] border-2 border-gray-100 bg-white transition hover:border-purple-200 shadow-sm overflow-hidden">
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-sm font-medium md:px-6 md:py-5 md:text-base"
+                className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-sm font-bold text-gray-900 md:px-6 md:py-5 md:text-base"
               >
                 <span>{f.q}</span>
                 <ChevronDown
-                  className={`h-4 w-4 shrink-0 transition-transform duration-300 ${open === i ? "rotate-180" : ""}`}
+                  className={`h-5 w-5 shrink-0 text-gray-400 transition-transform duration-300 ${open === i ? "rotate-180 text-purple-600" : ""}`}
                 />
               </button>
               {open === i && (
-                <div className="animate-fade-in px-5 pb-4 text-sm text-muted-foreground md:px-6 md:pb-5">
+                <div className="animate-fade-in px-5 pb-5 text-sm font-medium text-gray-600 md:px-6 md:pb-6">
                   {f.a}
                 </div>
               )}
@@ -1083,17 +1086,16 @@ function CTA() {
     <section className="mx-auto max-w-4xl px-5 py-16 md:px-10 md:py-24">
       <Reveal>
         <div
-          className="rounded-3xl p-8 text-center md:p-14"
-          style={{ background: "rgba(245,197,24,0.06)", border: "1px solid rgba(245,197,24,0.25)" }}
+          className="rounded-[3rem] p-8 text-center md:p-14 shadow-xl"
+          style={{ background: "#fef3c7", border: "4px solid #fde68a" }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-5"
-            style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.3)" }}>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold mb-5 bg-white text-yellow-600 shadow-sm">
             🎁 15-Minute Free Trial — No Payment Needed
           </div>
-          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-            Ready to Build Without Limits?
+          <h2 className="font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
+            Ready to Build <span className="font-['Caveat'] text-purple-600">Without Limits?</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm md:text-base" style={{ color: "rgba(255,255,255,0.55)" }}>
+          <p className="mx-auto mt-4 max-w-lg text-sm md:text-base font-medium text-gray-600">
             Message us on WhatsApp right now. We'll send your trial code within minutes — no card, no signup.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4">
@@ -1101,16 +1103,15 @@ function CTA() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-base font-bold transition hover:scale-105"
-              style={{ background: "#f5c518", color: "#111" }}
+              className="inline-flex items-center gap-3 rounded-[2rem] px-8 py-4 text-base font-bold transition hover:scale-105 shadow-md bg-green-500 text-white"
             >
               <span className="text-xl">💬</span> Start Free Trial on WhatsApp
             </a>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+            <p className="text-xs font-bold text-gray-500">
               WhatsApp: +91 73200 91112 · Replies within minutes
             </p>
           </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs font-bold text-gray-600">
             <span>✅ No credit card required</span>
             <span>✅ Works with existing workspace</span>
             <span>✅ Instant activation</span>
@@ -1124,18 +1125,18 @@ function CTA() {
 /* ─── STICKY WHATSAPP BUTTON ─────────────────────── */
 function StickyWhatsApp() {
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2">
+    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] flex flex-col items-end gap-3">
       {/* Attention label */}
       <div
-        className="rounded-full px-3 py-1 text-xs font-bold"
+        className="rounded-[2rem] px-4 py-2 text-sm font-black shadow-lg"
         style={{
-          background: "rgba(37,211,102,0.2)",
+          background: "#fff",
           color: "#25D366",
-          border: "1px solid rgba(37,211,102,0.4)",
-          animation: "wa-bounce 2.5s ease-in-out infinite",
+          border: "3px solid #25D366",
+          animation: "wa-bounce 2s ease-in-out infinite",
         }}
       >
-        💬 Get Free Trial!
+        👋 Need help? Chat with us!
       </div>
       {/* Main button with ping ring */}
       <div className="relative">
@@ -1143,24 +1144,24 @@ function StickyWhatsApp() {
         <span
           className="absolute inset-0 rounded-full"
           style={{
-            background: "rgba(37,211,102,0.4)",
-            animation: "wa-ping-ring 1.8s ease-out infinite",
+            background: "rgba(37,211,102,0.5)",
+            animation: "wa-ping-ring 1.5s ease-out infinite",
           }}
         />
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold shadow-2xl transition hover:scale-105 hover:brightness-110"
+          className="relative flex items-center justify-center gap-3 rounded-full px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-black shadow-2xl transition hover:scale-110"
           style={{
             background: "#25D366",
             color: "#fff",
-            boxShadow: "0 4px 30px rgba(37,211,102,0.5)",
+            boxShadow: "0 10px 40px rgba(37,211,102,0.6)",
             animation: "wa-pulse 2s ease-in-out infinite",
           }}
         >
-          <span className="text-xl">💬</span>
-          <span>WhatsApp Us</span>
+          <span className="text-2xl md:text-3xl">💬</span>
+          <span>WhatsApp Us Now</span>
         </a>
       </div>
     </div>
@@ -1169,21 +1170,21 @@ function StickyWhatsApp() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/50 px-4 py-10 md:px-6 md:py-14">
+    <footer className="border-t-2 border-gray-100 bg-white px-4 py-10 md:px-6 md:py-14">
       <div className="mx-auto max-w-7xl">
         {/* Top row */}
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
 
           {/* Brand col */}
           <div className="flex flex-col gap-3 max-w-xs">
-            <div className="flex items-center gap-2 text-base font-bold text-white">
+            <div className="flex items-center gap-2 text-base font-black text-gray-900">
               <span
-                className="flex h-7 w-7 items-center justify-center rounded-md text-sm"
-                style={{ background: "linear-gradient(135deg,#f5c518,#d4a017)", color: "#111" }}
+                className="flex h-8 w-8 items-center justify-center rounded-[0.8rem] text-sm shadow-sm"
+                style={{ background: "#fef3c7", color: "#d97706" }}
               >⚡</span>
-              Lovable <span style={{ color: "#f5c518" }}>Extension</span>
+              Lovable <span className="text-purple-600">Extension</span>
             </div>
-            <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <p className="text-xs font-medium leading-relaxed text-gray-500">
               Unlimited Lovable.dev credits via Chrome extension. No workspace transfer. Instant activation.
             </p>
           </div>
@@ -1192,54 +1193,49 @@ function Footer() {
           <div className="flex flex-wrap gap-10 text-sm">
 
             <div className="flex flex-col gap-2">
-              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Quick Links</div>
-              <a href="#" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>Home</a>
-              <a href="#pricing" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>Pricing</a>
-              <a href="#setup" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>Setup Guide</a>
-              <a href="#faq" className="hover:text-white transition" style={{ color: "rgba(255,255,255,0.6)" }}>FAQ</a>
+              <div className="text-[11px] font-black uppercase tracking-widest text-gray-400">Quick Links</div>
+              <a href="#" className="font-bold text-gray-600 hover:text-purple-600 transition">Home</a>
+              <a href="#pricing" className="font-bold text-gray-600 hover:text-purple-600 transition">Pricing</a>
+              <a href="#setup" className="font-bold text-gray-600 hover:text-purple-600 transition">Setup Guide</a>
+              <a href="#faq" className="font-bold text-gray-600 hover:text-purple-600 transition">FAQ</a>
             </div>
 
             <div className="flex flex-col gap-2">
-              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Contact</div>
+              <div className="text-[11px] font-black uppercase tracking-widest text-gray-400">Contact</div>
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition"
-                style={{ color: "rgba(255,255,255,0.6)" }}
+                className="font-bold text-green-600 hover:text-green-700 transition"
               >
                 💬 WhatsApp Support
               </a>
               <a
                 href="mailto:support@lovableextension.com"
-                className="hover:text-white transition"
-                style={{ color: "rgba(255,255,255,0.6)" }}
+                className="font-bold text-gray-600 hover:text-purple-600 transition"
               >
                 ✉️ Email Us
               </a>
-              <span style={{ color: "rgba(255,255,255,0.6)" }}>📞 {WHATSAPP_PHONE_DISPLAY}</span>
+              <span className="font-bold text-gray-600">📞 {WHATSAPP_PHONE_DISPLAY}</span>
             </div>
 
             <div className="flex flex-col gap-2">
-              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.4)" }}>Legal</div>
+              <div className="text-[11px] font-black uppercase tracking-widest text-gray-400">Legal</div>
               <a
                 href="/privacy-policy"
-                className="hover:text-white transition"
-                style={{ color: "rgba(255,255,255,0.6)" }}
+                className="font-bold text-gray-600 hover:text-purple-600 transition"
               >
                 Privacy Policy
               </a>
               <a
                 href="/terms-of-service"
-                className="hover:text-white transition"
-                style={{ color: "rgba(255,255,255,0.6)" }}
+                className="font-bold text-gray-600 hover:text-purple-600 transition"
               >
                 Terms of Service
               </a>
               <a
                 href="/refund-policy"
-                className="hover:text-white transition"
-                style={{ color: "rgba(255,255,255,0.6)" }}
+                className="font-bold text-gray-600 hover:text-purple-600 transition"
               >
                 Refund Policy
               </a>
@@ -1250,14 +1246,15 @@ function Footer() {
 
         {/* Bottom bar */}
         <div
-          className="mt-10 flex flex-col items-center justify-between gap-3 border-t pt-6 text-xs md:flex-row"
-          style={{ borderColor: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.3)" }}
+          className="mt-10 flex flex-col items-center justify-between gap-3 border-t-2 border-gray-100 pt-6 text-xs md:flex-row text-gray-500 font-bold"
         >
           <div className="flex items-center gap-2">
-            <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span>© {new Date().getFullYear()} Lovable Extension. All rights reserved.</span>
+            <Sparkles className="h-4 w-4 text-purple-600" />
+            <span>© {new Date().getFullYear()} Lovable Extension. All rights reserved. Unofficial extension.</span>
           </div>
-          <span>Made with ⚡ for builders · India 🇮🇳</span>
+          <div className="flex gap-4">
+            <span className="opacity-60">Not affiliated with lovable.dev</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -27,24 +27,24 @@
 }
 
 :root {
-  --radius: 0.875rem;
-  --background: oklch(0.16 0.02 270);
-  --foreground: oklch(0.98 0.005 250);
-  --card: oklch(0.21 0.025 270);
-  --card-foreground: oklch(0.98 0.005 250);
-  --primary: oklch(0.78 0.18 145);
-  --primary-foreground: oklch(0.15 0.02 270);
-  --secondary: oklch(0.28 0.04 270);
-  --secondary-foreground: oklch(0.98 0.005 250);
-  --muted: oklch(0.24 0.03 270);
-  --muted-foreground: oklch(0.72 0.02 260);
-  --accent: oklch(0.78 0.18 145);
-  --accent-foreground: oklch(0.15 0.02 270);
-  --border: oklch(0.32 0.03 270);
-  --ring: oklch(0.78 0.18 145);
-  --grad-hero: radial-gradient(ellipse at top, oklch(0.35 0.12 145 / 0.4), transparent 60%);
-  --grad-card: linear-gradient(135deg, oklch(0.24 0.04 270), oklch(0.18 0.03 280));
-  --glow: 0 0 60px oklch(0.78 0.18 145 / 0.25);
+  --radius: 1.5rem;
+  --background: #f4f4f5;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #fbbf24;
+  --accent-foreground: #111827;
+  --border: #e5e7eb;
+  --ring: #8b5cf6;
+  --grad-hero: radial-gradient(ellipse at top, rgba(139, 92, 246, 0.15), transparent 60%);
+  --grad-card: linear-gradient(135deg, #ffffff, #f9fafb);
+  --glow: 0 10px 40px rgba(139, 92, 246, 0.15);
 }
 
 @layer base {
