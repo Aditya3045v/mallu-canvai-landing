@@ -12,6 +12,7 @@ import {
   Menu,
   X,
   Calculator,
+  Lock,
 } from "lucide-react";
 import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
@@ -62,7 +63,7 @@ const plans = [
 ];
 
 const marqueeItems = [
-  "15-Minute Free Trial",
+  "30-Minute Free Trial",
   "Unlimited Credit Usage",
   "No Workspace Transfer",
   "No Project Migration",
@@ -78,7 +79,7 @@ const marqueeItems = [
 const faqs = [
   {
     q: "Is there a free trial?",
-    a: "Yes. Try unlimited credit usage for 15 minutes before choosing a plan. No payment or registration is required to start.",
+    a: "Yes. Try unlimited credit usage for 30 minutes before choosing a plan. No payment or registration is required to start.",
   },
   {
     q: "How does the hourly pass work? Is the time continuous?",
@@ -236,16 +237,132 @@ function Index() {
   );
 }
 
+function TrialKeyGenerator() {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [key, setKey] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleGenerate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/generate-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      
+      const text = await res.text();
+      let data: any = {};
+      
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (e) {
+        console.error("Non-JSON response received:", text);
+        throw new Error('The server returned an invalid response. This often happens if the backend is not running. Are you using `vercel dev`?');
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || data.message || 'Failed to generate key. Ensure you have not already claimed a trial.');
+      }
+      setKey(data.license?.key || data.key || data.licenseKey || data.id);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleCopy = () => {
+    if (key) {
+      navigator.clipboard.writeText(key);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  if (key) {
+    return (
+      <div className="mt-10 rounded-2xl bg-white p-6 shadow-xl border border-green-100 w-full max-w-md">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600">
+            <Check className="h-6 w-6" />
+          </div>
+          <h3 className="font-bold text-gray-900 text-lg">Trial Key Generated!</h3>
+        </div>
+        <p className="text-sm font-medium text-gray-600 mb-4">Copy your 30-minute unlimited trial key below:</p>
+        <div className="flex items-center gap-2 bg-gray-50 p-3 rounded-xl border border-gray-200">
+          <code className="text-purple-600 font-bold font-mono flex-1 text-sm break-all">{key}</code>
+          <button 
+            onClick={handleCopy}
+            className="shrink-0 rounded-lg bg-purple-100 px-4 py-2 text-xs font-bold text-purple-700 hover:bg-purple-200 transition"
+          >
+            {copied ? "Copied!" : "Copy"}
+          </button>
+        </div>
+        <div className="mt-5 text-sm font-semibold text-gray-600">
+          <p>Next steps:</p>
+          <ol className="list-decimal pl-4 mt-2 space-y-1 text-xs">
+            <li><a href="https://dl.eklas.dev/latest.zip" className="text-purple-600 hover:underline">Download the extension</a></li>
+            <li>Install it in Chrome (Developer Mode)</li>
+            <li>Paste this key to activate</li>
+          </ol>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-10 w-full max-w-md">
+      <form onSubmit={handleGenerate} className="flex flex-col gap-3">
+        <div className="flex items-center gap-2 bg-white rounded-full p-2 shadow-md border border-gray-200 focus-within:border-purple-400 focus-within:ring-2 focus-within:ring-purple-100 transition">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email address"
+            className="flex-1 bg-transparent px-4 py-2 text-sm font-medium text-gray-900 placeholder-gray-400 focus:outline-none"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold transition shadow-sm hover:scale-105 disabled:opacity-70 disabled:hover:scale-100"
+            style={{ background: "#8b5cf6", color: "#fff" }}
+          >
+            {loading ? "Generating..." : "Get Free Trial"} <Zap className="h-4 w-4" />
+          </button>
+        </div>
+        {error && <div className="text-xs font-semibold text-red-500 px-4">{error}</div>}
+        <div className="px-4 text-xs font-semibold text-gray-500 flex items-center gap-2">
+          <Lock className="h-3 w-3" /> 1 trial per user. Instant activation.
+        </div>
+      </form>
+      
+      <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-sm font-bold text-gray-600 ml-2">
+        <span className="flex items-center gap-2"><Check className="h-4 w-4 text-green-500" /> Instant Setup</span>
+        <span className="flex items-center gap-2"><Check className="h-4 w-4 text-green-500" /> Works Everywhere</span>
+      </div>
+      
+      <div className="ml-2 mt-3">
+        <a
+          href="https://dl.eklas.dev/latest.zip"
+          className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-purple-600 transition"
+        >
+          <Download className="h-4 w-4" /> Download Extension ZIP
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function Nav() {
   const [open, setOpen] = useState(false);
-  const links = [
-    { h: "#", l: "Home" },
-    { h: "#features", l: "Features" },
-    { h: "#reviews", l: "Reviews" },
-    { h: "#pricing", l: "Pricing" },
-    { h: "#setup", l: "Setup" },
-    { h: "#faq", l: "FAQ" },
-  ];
+  const links: { h: string, l: string }[] = []; // Removed secondary navigation to focus attention on primary CTA
   return (
     <header className="sticky top-0 z-50 px-4 pt-5 md:px-10 md:pt-6">
       <div
@@ -329,7 +446,7 @@ function Nav() {
 }
 
 const heroFeatures = [
-  { icon: "🎁", t: "15-Minute Free Trial",     d: "Test all features with unlimited credits." },
+  { icon: "🎁", t: "30-Minute Free Trial",     d: "Test all features with unlimited credits." },
   { icon: "⚡", t: "Unlimited Prompts & Chat",  d: "No credit deductions or token restrictions." },
   { icon: "🔒", t: "Works on Current Projects", d: "No project migrations or workspace transfer." },
   { icon: "🔑", t: "Instant Key Delivery",     d: "Delivered instantly via WhatsApp 24/7." },
@@ -339,131 +456,112 @@ function Hero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "var(--background)", minHeight: "88vh" }}
+      style={{ background: "#f1f5f9", minHeight: "85vh" }}
     >
       {/* subtle radial glow */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
-        style={{ background: "radial-gradient(ellipse 60% 50% at 20% 60%, rgba(139,92,246,0.06) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle at 50% 0%, rgba(139,92,246,0.08) 0%, transparent 60%)" }}
       />
       
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-start justify-center gap-12 px-5 py-20 md:flex-row md:items-center md:gap-16 md:px-10 md:py-28">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center justify-center gap-12 px-5 py-20 md:flex-row md:items-center md:justify-between md:gap-16 md:px-10 md:py-28">
 
         {/* ── LEFT COLUMN ── */}
-        <div className="flex-1">
+        <div className="flex-1 max-w-2xl">
           {/* badge */}
           <div
-            className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider"
-            style={{ background: "rgba(139,92,246,0.1)", color: "#8b5cf6" }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider shadow-sm"
+            style={{ background: "#fff", color: "#6d28d9", border: "1px solid #ede9fe" }}
           >
-            <Zap className="h-3 w-3" />
-            INSTANT DELIVERY
+            <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            Instant WhatsApp Delivery
           </div>
 
           {/* headline */}
-          <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-            Stop Running Out<br />
-            Of Lovable Credits<br />
-            <span className="font-['Caveat'] text-5xl sm:text-6xl md:text-7xl font-bold" style={{ color: "var(--primary)", display: "inline-block", transform: "rotate(-2deg)", marginTop: "0.2em" }}>Mid-Build.</span>
+          <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-[4rem]">
+            Build Without Limits.<br />
+            <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)" }}>Unlimited Lovable Credits.</span>
           </h1>
 
           {/* sub */}
-          <p className="mt-5 max-w-md text-base leading-relaxed text-gray-600 font-medium">
-            Get unlimited Lovable.dev credits via a Chrome extension. No workspace transfer. Works with your existing projects from ₹349.
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-600 font-medium">
+            Get unlimited Lovable.dev credits via our custom Chrome extension. No workspace transfer required. Works seamlessly with your existing projects.
           </p>
 
           {/* account safety line */}
           <p className="mt-4 flex items-center gap-2 text-sm font-semibold text-gray-500">
             <span className="text-xl">🔒</span>
-            Works as a client-side Chrome wrapper. Unofficial and no guarantee.
+            Unofficial client-side wrapper. Use responsibly.
           </p>
 
-          {/* free trial badge */}
-          <div
-            className="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold shadow-sm"
-            style={{ background: "#fef3c7", color: "#d97706" }}
-          >
-            <Check className="h-4 w-4" /> 15-Minute Free Trial — No Card Needed
-          </div>
-
-          {/* CTAs — WhatsApp is now primary purple */}
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-[2rem] px-8 py-4 text-sm font-bold transition hover:scale-105 shadow-md"
-              style={{ background: "var(--primary)", color: "#fff" }}
-            >
-              <span className="flex items-center gap-2 text-base">💬 Get My Free Trial Key</span>
-              <span className="text-[11px] font-medium opacity-80">Instant WhatsApp · No Card Needed</span>
-            </a>
-            <a
-              href="https://dl.eklas.dev/latest.zip"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-[2rem] px-6 py-4 text-sm font-bold transition hover:scale-105 shadow-sm"
-              style={{ background: "#fff", border: "2px solid #e5e7eb", color: "#374151" }}
-            >
-              <span className="flex items-center gap-2"><Download className="h-4 w-4" /> Download Extension</span>
-              <span className="text-[10px] font-medium opacity-60">Chrome ZIP · Free Trial Built-In</span>
-            </a>
-            <a
-              href="#setup"
-              className="inline-flex flex-col items-center justify-center gap-0.5 rounded-[2rem] px-6 py-4 text-sm font-bold transition hover:scale-105"
-              style={{ background: "transparent", border: "2px solid transparent", color: "#6b7280" }}
-            >
-              <span className="flex items-center gap-2"><Play className="h-4 w-4" /> Watch Setup</span>
-              <span className="text-[10px] font-medium opacity-60">2 Min Video</span>
-            </a>
-          </div>
-
-          {/* ── Social proof stat row (Element 5) ── */}
-          <div className="mt-10 flex flex-wrap items-center gap-5">
-            <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-black" style={{ color: "#8b5cf6" }}>500+</span>
-              <span className="text-xs font-semibold leading-tight text-gray-500">Builders<br/>using it</span>
-            </div>
-            <div className="h-8 w-px bg-gray-200" />
-            <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-black" style={{ color: "#fbbf24" }}>15 min</span>
-              <span className="text-xs font-semibold leading-tight text-gray-500">Free trial<br/>no card</span>
-            </div>
-            <div className="h-8 w-px bg-gray-200" />
-            <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-black text-gray-900">₹349</span>
-              <span className="text-xs font-semibold leading-tight text-gray-500">Starts<br/>from</span>
-            </div>
-            <div className="h-8 w-px hidden sm:block bg-gray-200" />
-            <div className="hidden sm:flex items-center gap-1.5">
-              <span style={{ color: "#fbbf24" }}>★★★★★</span>
-              <span className="text-xs font-semibold text-gray-500">Rated by users</span>
-            </div>
-          </div>
+          {/* CTAs — Single Focused CTA per Unbounce CRO guidelines */}
+          <TrialKeyGenerator />
         </div>
 
-        {/* ── RIGHT COLUMN — feature list card ── */}
-        <div className="w-full flex-shrink-0 md:w-[400px]">
-          <div
-            className="rounded-[2.5rem] p-6 shadow-xl"
-            style={{ background: "#ffffff", border: "2px solid #f3f4f6" }}
-          >
-            <h3 className="font-['Caveat'] text-3xl font-bold mb-4 text-center" style={{ color: "#8b5cf6" }}>Why builders love it</h3>
-            {heroFeatures.map((f, i) => (
-              <div
-                key={f.t}
-                className="flex items-center gap-4 rounded-2xl px-3 py-3.5 transition hover:bg-gray-50"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-xl"
-                  style={{ background: "#fef3c7", color: "#d97706" }}>
-                  {f.icon}
-                </span>
-                <div className="flex-1">
-                  <div className="text-sm font-bold text-gray-900">{f.t}</div>
-                  <div className="mt-0.5 text-xs font-medium text-gray-500">{f.d}</div>
+        {/* ── RIGHT COLUMN — Feature Visualization ── */}
+        <div className="w-full flex-shrink-0 md:w-[500px]">
+          <div className="relative rounded-2xl bg-white p-2 shadow-2xl border border-gray-100 transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
+            {/* Browser Header Mockup */}
+            <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-100 rounded-t-xl">
+              <div className="flex gap-1.5">
+                <div className="h-3 w-3 rounded-full bg-red-400"></div>
+                <div className="h-3 w-3 rounded-full bg-yellow-400"></div>
+                <div className="h-3 w-3 rounded-full bg-green-400"></div>
+              </div>
+              <div className="mx-auto flex h-6 w-2/3 items-center justify-center rounded-md bg-white text-[10px] font-medium text-gray-400 border border-gray-200">
+                <span className="flex items-center gap-1">lovable.dev</span>
+              </div>
+            </div>
+            
+            {/* Content Area */}
+            <div className="p-6 md:p-8 bg-white rounded-b-xl">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600">
+                    <InfinityIcon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg">Active Credits</h3>
+                    <p className="text-sm font-medium text-green-600">Unlimited Plan Active</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">Status</div>
+                  <div className="text-sm font-bold text-gray-900 flex items-center gap-1">
+                    <span className="h-2 w-2 rounded-full bg-green-500"></span> Connected
+                  </div>
                 </div>
               </div>
-            ))}
+              
+              <div className="space-y-4">
+                {heroFeatures.map((f, i) => (
+                  <div
+                    key={f.t}
+                    className="flex items-start gap-4 p-4 rounded-xl border border-gray-50 bg-gray-50/50 hover:bg-gray-50 transition"
+                  >
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-base shadow-sm">
+                      {f.icon}
+                    </span>
+                    <div className="flex-1">
+                      <div className="text-sm font-bold text-gray-900">{f.t}</div>
+                      <div className="mt-0.5 text-xs font-medium text-gray-500">{f.d}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Floating Trust Badge */}
+          <div className="absolute -bottom-6 -left-6 hidden md:flex items-center gap-3 rounded-2xl bg-white p-4 shadow-xl border border-gray-100 animate-bounce" style={{ animationDuration: '3s' }}>
+            <div className="flex -space-x-2">
+              <div className="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-blue-500"></div>
+              <div className="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-green-500"></div>
+              <div className="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-purple-500"></div>
+            </div>
+            <div className="text-xs font-bold text-gray-600">
+              <span className="text-gray-900">500+</span> Builders<br/>Trust Us
+            </div>
           </div>
         </div>
 
@@ -499,13 +597,13 @@ function Features() {
           Build Without Limits
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm font-medium text-gray-600 md:text-base">
-          Try first with a 15-minute free trial. Upgrade only when it works for
+          Try first with a 30-minute free trial. Upgrade only when it works for
           you.
         </p>
       </Reveal>
       <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs md:mt-10 md:gap-3 md:text-sm">
         {[
-          "15-minute trial available",
+          "30-minute trial available",
           "No credit limits",
           "Instant delivery",
           "No project migration",
@@ -1090,7 +1188,7 @@ function CTA() {
           style={{ background: "#fef3c7", border: "4px solid #fde68a" }}
         >
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold mb-5 bg-white text-yellow-600 shadow-sm">
-            🎁 15-Minute Free Trial — No Payment Needed
+            🎁 30-Minute Free Trial — No Payment Needed
           </div>
           <h2 className="font-display text-3xl font-black text-gray-900 sm:text-4xl md:text-5xl">
             Ready to Build <span className="font-['Caveat'] text-purple-600">Without Limits?</span>
@@ -1125,42 +1223,32 @@ function CTA() {
 /* ─── STICKY WHATSAPP BUTTON ─────────────────────── */
 function StickyWhatsApp() {
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] flex flex-col items-end gap-3">
+    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] flex flex-col items-end gap-2">
       {/* Attention label */}
       <div
-        className="rounded-[2rem] px-4 py-2 text-sm font-black shadow-lg"
+        className="rounded-[2rem] px-3 py-1.5 text-xs font-bold shadow-md"
         style={{
           background: "#fff",
           color: "#25D366",
-          border: "3px solid #25D366",
-          animation: "wa-bounce 2s ease-in-out infinite",
+          border: "2px solid #25D366",
         }}
       >
         👋 Need help? Chat with us!
       </div>
-      {/* Main button with ping ring */}
+      {/* Main button */}
       <div className="relative">
-        {/* Ping ring */}
-        <span
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: "rgba(37,211,102,0.5)",
-            animation: "wa-ping-ring 1.5s ease-out infinite",
-          }}
-        />
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative flex items-center justify-center gap-3 rounded-full px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-black shadow-2xl transition hover:scale-110"
+          className="relative flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm md:text-base font-bold shadow-xl transition hover:scale-105"
           style={{
             background: "#25D366",
             color: "#fff",
-            boxShadow: "0 10px 40px rgba(37,211,102,0.6)",
-            animation: "wa-pulse 2s ease-in-out infinite",
+            boxShadow: "0 10px 25px rgba(37,211,102,0.4)",
           }}
         >
-          <span className="text-2xl md:text-3xl">💬</span>
+          <span className="text-lg md:text-xl">💬</span>
           <span>WhatsApp Us Now</span>
         </a>
       </div>
