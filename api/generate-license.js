@@ -1,3 +1,5 @@
+import { kv } from '@vercel/kv';
+
 export default async function handler(req, res) {
   // Add CORS headers to allow local testing if needed
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -24,6 +26,14 @@ export default async function handler(req, res) {
   }
 
   try {
+    // 1. Check if the user already claimed a trial
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      const hasClaimed = await kv.get(`trial_claimed_${email.toLowerCase()}`);
+      if (hasClaimed) {
+        return res.status(403).json({ error: 'You have already claimed a free trial. Please purchase an unlimited key.' });
+      }
+    }
+
     // Generate the trial key via the Eklas License API
     const response = await fetch('https://io.eklas.dev/api/v1/license/generate', {
       method: 'POST',
@@ -52,6 +62,11 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       return res.status(response.status).json(data);
+    }
+
+    // 2. Mark this email as having claimed a trial
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      await kv.set(`trial_claimed_${email.toLowerCase()}`, true);
     }
 
     return res.status(200).json(data);
