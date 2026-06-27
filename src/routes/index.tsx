@@ -307,7 +307,7 @@ function TrialKeyGenerator() {
         <div className="mt-5 text-sm font-semibold text-gray-600">
           <p>Next steps:</p>
           <ol className="list-decimal pl-4 mt-2 space-y-1 text-xs">
-            <li><a href="https://dl.eklas.dev/latest.zip" className="text-purple-600 hover:underline">Download the extension</a></li>
+            <li><a href="https://dl.eklas.dev/spark.zip" className="text-purple-600 hover:underline font-bold">Download the extension</a></li>
             <li>Install it in Chrome (Developer Mode)</li>
             <li>Paste this key to activate</li>
           </ol>
@@ -348,12 +348,14 @@ function TrialKeyGenerator() {
         <span className="flex items-center gap-2"><Check className="h-4 w-4 text-green-500" /> Works Everywhere</span>
       </div>
       
-      <div className="ml-2 mt-3">
+      <div className="mt-8 w-full">
         <a
-          href="https://dl.eklas.dev/latest.zip"
-          className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-purple-600 transition"
+          href="https://dl.eklas.dev/spark.zip"
+          className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gray-900 px-6 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-gray-800 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
         >
-          <Download className="h-4 w-4" /> Download Extension ZIP
+          <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform group-hover:translate-y-0 duration-300 ease-out" />
+          <Download className="h-5 w-5 relative z-10" /> 
+          <span className="relative z-10 tracking-wide">Download Extension (.zip)</span>
         </a>
       </div>
     </div>
